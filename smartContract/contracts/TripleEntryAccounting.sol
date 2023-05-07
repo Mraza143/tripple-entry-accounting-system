@@ -13,8 +13,10 @@ contract TripleEntryAccounting {
         Data memory newData = Data(id, hashedValue);
         data.push(newData);
     }
-
+// comment
     function getData() public view returns (Data[] memory) {
+
+
         return(data);
     }
 
