@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/TripleEntryAccounting.sol": {
+      "content": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.7;\n\ncontract TripleEntryAccounting {\n    struct Data{\n        uint id;\n        string hashedValue;\n    }\n\n    Data[] public data;\n\n    function addData(uint id,string memory hashedValue) public {\n        Data memory newData = Data(id, hashedValue);\n        data.push(newData);\n    }\n\n    function getData() public view returns (Data[] memory) {\n        // for (uint256 i = 0; i <= data.length; i++){\n        //     data[i].id;\n        //     data[i].hashedValue;\n        // }\n        return(data);\n    }\n\n    function getData2() public {\n        for (uint256 i = 0; i <= data.length; i++){\n            emit print(data[i].id,data[i].hashedValue);\n        }\n    }\n    event print(uint id,string value);\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
