@@ -1,48 +1,52 @@
 import mongoose from "mongoose";
 import validator from "validator";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const entrySchema = new mongoose.Schema({
+  // _id: Number,
   documentType: {
     type: String,
-    required: [true, "Please Enter Document Type"],
+    // required: [true, "Please Enter Document Type"],
   },
 
   headerText: {
     type: String,
-    required: [true, "Please Enter Header Text"],
+    // required: [true, "Please Enter Header Text"],
     unique: true,
   },
 
   documentDate: {
     type: Date,
-    default:Date.now,
+    default: Date.now,
   },
 
   postingDate: {
     type: Date,
-    default:Date.now,
+    default: Date.now,
   },
-  lineItems:[
+  lineItems: [
     {
-      generalLedger:{
+      generalLedger: {
         type: Number,
-        required: [true, "Please Enter General Ledger Type"]
+        // required: [true, "Please Enter General Ledger Type"],
       },
-      costCenter:{
+      costCenter: {
         type: Number,
-        required: [true, "Please Enter The Cost Center"]
+        // required: [true, "Please Enter The Cost Center"],
       },
-      lineItemText:{
+      lineItemText: {
         type: String,
-        required: [true, "Please Enter Line Item Text"]
+        // required: [true, "Please Enter Line Item Text"],
       },
-      amount:{
+      amount: {
         type: Number,
-        required: [true, "Please Enter The Amount"]
+        // required: [true, "Please Enter The Amount"],
       },
     },
   ],
-
 });
+entrySchema.plugin(AutoIncrement, { inc_field: "id" });
 
 export default mongoose.model("Entry", entrySchema);
