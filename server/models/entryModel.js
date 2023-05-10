@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
-import validator from "validator";
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const AutoIncrement = require("mongoose-sequence")(mongoose);
+// import { createRequire } from "module";
+// const require = createRequire(import.meta.url);
+// const sequencer = require("mongoose-sequence")(mongoose);
 
 const entrySchema = new mongoose.Schema({
-  // _id: Number,
   documentType: {
     type: String,
     // required: [true, "Please Enter Document Type"],
@@ -14,7 +12,6 @@ const entrySchema = new mongoose.Schema({
   headerText: {
     type: String,
     // required: [true, "Please Enter Header Text"],
-    unique: true,
   },
 
   documentDate: {
@@ -47,6 +44,6 @@ const entrySchema = new mongoose.Schema({
     },
   ],
 });
-entrySchema.plugin(AutoIncrement, { inc_field: "id" });
+// entrySchema.plugin(sequencer, { inc_field: "id", start_seq: 1 });
 
 export default mongoose.model("Entry", entrySchema);
