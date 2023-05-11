@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Button, Flex, FormLabel, Input } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import axios from "axios";
+import sha256 from "js-sha256";
 
 const LineItem = ({ index, lineItems, setLineItems }) => {
   const onInputChange = (e) => {
@@ -110,7 +111,12 @@ const Entry = () => {
         "http://localhost:5000/api/entry",
         formValue
       );
-      console.log(response.data);
+      const amounts = formValue.lineItems.map((item) => item.amount);
+      const ConcatenatedStringAmount = amounts.join("");
+      const hash = sha256(ConcatenatedStringAmount);
+
+      console.log(hash);
+      console.log(response.data.entry.id);
     } catch (error) {
       console.error(error);
     }
