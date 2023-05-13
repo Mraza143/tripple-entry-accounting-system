@@ -32,7 +32,9 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
 
   const [formValue, setFormValue] = useState(initialState);
-  const { loading, error } = useSelector((state) => ({ ...state.userAuth }));
+  const { /*loading ,*/ error } = useSelector((state) => ({
+    ...state.userAuth,
+  }));
   const { name, email, password, role } = formValue;
   const dispatch = useDispatch();
   const navigate = useNavigate();

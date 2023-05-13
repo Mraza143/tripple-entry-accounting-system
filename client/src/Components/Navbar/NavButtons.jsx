@@ -1,12 +1,12 @@
 import { Button, Stack } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch /*, useSelector*/ } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setLogout } from "../../redux/features/userSlice";
 
 const NavButtons = ({ isLoggedIn, isMobileScreen }) => {
   const navigate = useNavigate();
 
-  const { result } = useSelector((state) => ({ ...state.auth }));
+  // const { result } = useSelector((state) => ({ ...state.auth }));
   const dispatch = useDispatch();
 
   const handleLogoutSubmit = () => {

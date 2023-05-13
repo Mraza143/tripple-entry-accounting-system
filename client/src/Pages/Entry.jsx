@@ -2,14 +2,21 @@ import React, { useState } from "react";
 import { Box, Button, Flex, FormLabel, Input } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import axios from "axios";
+import { ethers } from "ethers";
+import TripleEntryAccounting from "../TripleEntryAccounting.json";
 import sha256 from "js-sha256";
-
-const LineItem = ({ index, lineItems, setLineItems }) => {
+const LineItem = ({
+  index,
+  lineItems,
+  setLineItems,
+  formValue,
+  setFormValue,
+}) => {
   const onInputChange = (e) => {
     const { name, value } = e.target;
     const updatedLineItems = [...lineItems];
     updatedLineItems[index][name] = value;
-    setLineItems(updatedLineItems);
+    setFormValue({ ...formValue, lineItems: updatedLineItems });
   };
 
   const { generalLedger, costCenter, lineItemText, amount } = lineItems[index];
@@ -63,7 +70,6 @@ const Entry = () => {
     { generalLedger: "", costCenter: "", lineItemText: "", amount: "" },
     { generalLedger: "", costCenter: "", lineItemText: "", amount: "" },
   ]);
-
   const [formValue, setFormValue] = useState({
     documentType: "",
     headerText: "",
@@ -88,9 +94,7 @@ const Entry = () => {
 
   const deleteLineItem = () => {
     if (lineItems.length > 2) {
-      // const updatedLineItems = [...lineItems];
       lineItems.pop();
-      // updatedLineItems.pop();
       setLineItems(lineItems);
       setFormValue({
         ...formValue,
@@ -114,9 +118,27 @@ const Entry = () => {
       const amounts = formValue.lineItems.map((item) => item.amount);
       const ConcatenatedStringAmount = amounts.join("");
       const hash = sha256(ConcatenatedStringAmount);
-
-      console.log(hash);
-      console.log(response.data.entry.id);
+      const id = response.data.entry.id;
+      console.log(`hash:${hash} && id:${id}`);
+      console.log(response.data);
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send("eth_requestAccounts", []);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(
+        TripleEntryAccounting.address,
+        TripleEntryAccounting.abi,
+        signer
+      );
+      const txAdd = await contract.addData(id, hash);
+      await txAdd.wait();
+      const txGet = await contract.getData();
+      const normalizedTxGet = txGet.map((entry) => {
+        return {
+          id: entry.id.toNumber(),
+          hash: entry.hashedValue,
+        };
+      });
+      console.log(normalizedTxGet);
     } catch (error) {
       console.error(error);
     }

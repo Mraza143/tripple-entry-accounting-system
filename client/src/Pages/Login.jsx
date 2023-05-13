@@ -24,7 +24,9 @@ const initialState = {
 
 export default function Login() {
   const [formValue, setFormValue] = useState(initialState);
-  const { loading, error } = useSelector((state) => ({ ...state.userAuth }));
+  const { /*loading,*/ error } = useSelector((state) => ({
+    ...state.userAuth,
+  }));
   const { email, password } = formValue;
   const dispatch = useDispatch();
   const navigate = useNavigate();
