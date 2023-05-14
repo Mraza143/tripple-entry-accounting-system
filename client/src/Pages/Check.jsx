@@ -15,8 +15,10 @@ import { dummyCheckData } from "../dummyData";
 import { ethers } from "ethers";
 import TripleEntryAccounting from "../TripleEntryAccounting.json";
 import axios from "axios";
+import sha256 from "js-sha256";
 
 const Check = () => {
+
   useEffect(() => {
     const fetchAllMySharedFiles = async () => {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -35,7 +37,20 @@ const Check = () => {
           hash: entry.hashedValue,
         };
       });
-      console.log(Array.isArray(normalizedTxGet));
+      try {
+        const response = await axios.get("http://localhost:5000/api/allEntries");
+        const concatenatedAmounts = response?.data.entries.map((entry) => {
+          const amounts = entry.lineItems.map((lineItem) => lineItem.amount);
+          return sha256(amounts.join(''));
+        });
+        
+        console.log("concat " + concatenatedAmounts);
+        //console.log("response Mongo", response?.data.entries );
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    
+
 
       window.ethereum.on("accountsChanged", async () => {
         const accounts = await window.ethereum.request({
