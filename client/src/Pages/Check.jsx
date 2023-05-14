@@ -10,10 +10,44 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { dummyCheckData } from "../dummyData";
+import { ethers } from "ethers";
+import TripleEntryAccounting from "../TripleEntryAccounting.json";
+import axios from "axios";
 
 const Check = () => {
+  useEffect(() => {
+    const fetchAllMySharedFiles = async () => {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+      const signer = provider.getSigner();
+
+      const contract = new ethers.Contract(
+        TripleEntryAccounting.address,
+        TripleEntryAccounting.abi,
+        signer
+      );
+      const txGet = await contract.getData();
+      const normalizedTxGet = txGet.map((entry) => {
+        return {
+          id: entry.id.toNumber(),
+          hash: entry.hashedValue,
+        };
+      });
+      console.log(Array.isArray(normalizedTxGet));
+
+      window.ethereum.on("accountsChanged", async () => {
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        const account = ethers.utils.getAddress(accounts[0]);
+      });
+
+    };
+
+    fetchAllMySharedFiles();
+  }, []);
   return (
     <Box fontFamily={"auto"} width={"95%"} marginX="auto" marginY="2em">
       <Heading fontFamily={"auto"} fontSize={"4xl"}>
