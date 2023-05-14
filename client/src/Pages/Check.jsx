@@ -18,13 +18,12 @@ import axios from "axios";
 import sha256 from "js-sha256";
 
 const Check = () => {
-
-  useEffect(() => {
+  const [myArray, setMyArray] = useState([]);
+  const [hashes, setHashes] = useState([]);
+  /*useEffect(() => {
     const fetchAllMySharedFiles = async () => {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-
       const signer = provider.getSigner();
-
       const contract = new ethers.Contract(
         TripleEntryAccounting.address,
         TripleEntryAccounting.abi,
@@ -37,6 +36,15 @@ const Check = () => {
           hash: entry.hashedValue,
         };
       });
+      window.ethereum.on("accountsChanged", async () => {
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        const account = ethers.utils.getAddress(accounts[0]);
+      });
+      
+      console.log(Array.isArray(normalizedTxGet));
+      console.log("norm "+ normalizedTxGet)
       try {
         const response = await axios.get("http://localhost:5000/api/allEntries");
         const concatenatedAmounts = response?.data.entries.map((entry) => {
@@ -44,13 +52,63 @@ const Check = () => {
           return sha256(amounts.join(''));
         });
         
-        console.log("concat " + concatenatedAmounts);
-        //console.log("response Mongo", response?.data.entries );
+        /*const mergedArray = normalizedTxGet.map(({ id: idB, hash: hashB }) => {
+          //const { id: idD } = response?.data.entries.find(({ id }) => id === idB) || {};
+         // const hashD = concatenatedAmounts[response?.data.entries.findIndex(({ id }) => id === idB)] || '';
+      
+          return { idB, hashB};
+        });
+        console.log("merged" + mergedArray);
+        
+        //console.log("concat " + concatenatedAmounts);
+
       } catch (error) {
         console.error('Error fetching data:', error);
       }
-    
+    };
+   
+    fetchAllMySharedFiles();
+  }, []);*/
+  useEffect(() => {
+    const fetchAllMySharedFiles = async () => {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(
+        TripleEntryAccounting.address,
+        TripleEntryAccounting.abi,
+        signer
+      );
+      const txGet = await contract.getData();
+      const normalizedTxGet = txGet.map((entry) => {
+        return {
+          id: entry.id.toNumber(),
+          hash: entry.hashedValue,
+        };
+      });
+      console.log("norm")
+      console.log(normalizedTxGet);
+      const response = await axios.get("http://localhost:5000/api/allEntries");
+      console.log("resp")
+      console.log(response?.data.entries);
 
+      const concatenatedAmounts = response?.data.entries.map((entry) => {
+        const amounts = entry.lineItems.map((lineItem) => lineItem.amount);
+        return sha256(amounts.join(''));
+      });
+      setHashes(concatenatedAmounts)
+      console.log("conc")
+      console.log(concatenatedAmounts);
+
+      const mergedArray = normalizedTxGet.map(({ id: idB, hash: hashB }) => {
+        const { id: idD } = response?.data.entries.find(({ id }) => id === idB) || " ";
+        const hashD = concatenatedAmounts[response?.data.entries.findIndex(({ id }) => id === idB)] || '';
+    
+        return { idB, hashB, hashD, idD };
+      });
+    
+      console.log("mergedArray");
+      console.log(mergedArray);
+      setMyArray(mergedArray)
 
       window.ethereum.on("accountsChanged", async () => {
         const accounts = await window.ethereum.request({
@@ -77,10 +135,10 @@ const Check = () => {
           <Thead>
             <Tr bg="#f5f5f5">
               <Th>
-                Doc. number in <br /> database
+                Doc. number in <br /> chain
               </Th>
               <Th>
-                Doc. number on <br /> chain
+                Doc. number on <br /> database
               </Th>
               <Th>Hash generated using database data</Th>
               <Th>Hash stored on chain</Th>
@@ -89,19 +147,19 @@ const Check = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {dummyCheckData.map((data, i) => (
+            {myArray.map((data, i) => (
               <Tr key={i}>
-                <Td>{data.docNumberDatabase}</Td>
-                <Td>{data.docNumberChain}</Td>
-                <Td>{data.hashDatabase}</Td>
-                <Td>{data.hashChain}</Td>
+                <Td>{data.idB}</Td>
+                <Td>{data.idD ==  0 ? "" :data.idD }</Td>
+                <Td>{data.hashD }</Td>
+                <Td>{data.hashB}</Td>
                 <Td>
-                  {data.docNumberDatabase === data.docNumberChain
+                  {data.idB === data.idD
                     ? "true"
                     : "false"}
                 </Td>
                 <Td>
-                  {data.hashDatabase === data.hashChain ? "true" : "false"}
+                  {data.hashB === data.hashD ? "true" : "false"}
                 </Td>
               </Tr>
             ))}
