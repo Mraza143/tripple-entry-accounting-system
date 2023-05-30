@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Text,
@@ -9,14 +9,33 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { dummyShowData } from "../dummyData";
+import axios from "axios";
 
 const Show = () => {
+  const [myArray, setMyArray] = useState([]);
+  useEffect(() => {
+    const fetchAllMySharedFiles = async () => {
+
+      const response = await axios.get("http://localhost:5000/api/allEntries");
+      console.log("resp")
+      console.log(response?.data.entries);
+      setMyArray(response?.data.entries)
+
+
+      
+    
+
+
+    };
+
+    fetchAllMySharedFiles();
+  }, []);
   return (
     <Box fontFamily={"auto"} width={"95%"} marginX="auto" marginY="2em">
       <TableContainer>
         <Table fontSize={"sm"} size="md" variant="simple">
           <Tbody>
-            {dummyShowData.map((data, i) => (
+            {myArray.map((data, i) => (
               <Box key={i} marginBottom={"60px"}>
                 <Text
                   fontSize="2xl"
@@ -24,31 +43,28 @@ const Show = () => {
                   marginBottom="15px"
                   marginLeft="15px"
                 >
-                  Document Number: {data.docNumber}
+                  Document Number: {data.id}
                 </Text>
                 <Tr>
                   <Td width={"20%"}>Document Header:</Td>
-                  <Td>{data.docHeader}</Td>
+                  <Td>{data.headerText}</Td>
                 </Tr>
                 <Tr>
                   <Td width={"20%"}>Document Type:</Td>
-                  <Td>{data.docType}</Td>
+                  <Td>{data.documentType}</Td>
                 </Tr>
-                <Tr>
-                  <Td width={"20%"}>User:</Td>
-                  <Td>{data.docUser}</Td>
-                </Tr>
+
                 <Tr>
                   <Td width={"20%"}>Entry Date:</Td>
                   <Td>{data.docEntryDate}</Td>
                 </Tr>
                 <Tr>
                   <Td width={"20%"}>Last Modified:</Td>
-                  <Td>{data.docLastModified}</Td>
+                  <Td>{data.updatedAt}</Td>
                 </Tr>
                 <Tr>
                   <Td width={"20%"}>Posting Date:</Td>
-                  <Td>{data.docPostingDate}</Td>
+                  <Td>{data.postingDate}</Td>
                 </Tr>
                 <Tr>
                   <Td width={"20%"}>Line Item 1:</Td>
