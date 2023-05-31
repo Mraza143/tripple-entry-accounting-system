@@ -23,7 +23,7 @@ const LineItem = ({
 
   return (
     <>
-      <FormLabel fontSize={"lg"} marginTop={"1em"}>
+      <FormLabel fontSize={"md"} marginTop={"1em"}>
         Item {index + 1}
       </FormLabel>
       <Input
@@ -31,8 +31,8 @@ const LineItem = ({
         name="generalLedger"
         value={generalLedger}
         placeholder="General Ledger"
-        size="lg"
-        marginBottom={"5px"}
+        size="md"
+        marginBottom={"10px"}
         onChange={onInputChange}
       />
       <Input
@@ -40,9 +40,9 @@ const LineItem = ({
         name="costCenter"
         value={costCenter}
         placeholder="Cost Center"
-        size="lg"
+        size="md"
         onChange={onInputChange}
-        marginBottom={"5px"}
+        marginBottom={"10px"}
       />
       <Input
         type="text"
@@ -50,8 +50,8 @@ const LineItem = ({
         value={lineItemText}
         placeholder="Line Item Text"
         onChange={onInputChange}
-        size="lg"
-        marginBottom={"5px"}
+        size="md"
+        marginBottom={"10px"}
       />
       <Input
         type="number"
@@ -59,7 +59,7 @@ const LineItem = ({
         value={amount}
         placeholder="Amount Positive for Debit, Negative for Credit"
         onChange={onInputChange}
-        size="lg"
+        size="md"
       />
     </>
   );
@@ -145,94 +145,103 @@ const Entry = () => {
   };
 
   return (
-    <Box fontFamily={"auto"} width={"90%"} marginX="auto" marginY="2em">
-      <FormLabel marginBottom={"0.5em"} fontWeight="bold" fontSize={"2xl"}>
-        Document Header
-      </FormLabel>
-      <Input
-        type="text"
-        name="documentType"
-        placeholder="Document Type"
-        size="lg"
-        onChange={onInputChange}
-        marginBottom={"15px"}
-      />
-      <Input
-        type="text"
-        name="headerText"
-        placeholder="Header Text"
-        size="lg"
-        onChange={onInputChange}
-        marginBottom={"15px"}
-      />
-      <FormLabel fontSize={"md"}>Document Date</FormLabel>
-      <Input
-        type="date"
-        name="documentDate"
-        onChange={onInputChange}
-        size="lg"
-        marginBottom={"15px"}
-      />
-      <FormLabel fontSize={"md"}>Posting Date</FormLabel>
-      <Input
-        type="date"
-        name="postingDate"
-        size="lg"
-        onChange={onInputChange}
-        marginBottom={"15px"}
-      />
-
-      <Flex align={"center"} justify={"space-between"} marginTop={"2em"}>
-        <FormLabel fontWeight="bold" fontSize={"2xl"}>
-          Line Items
+    <Box bg="#f7fafc">
+      <Box
+        fontFamily={"poppins"}
+        width={"90%"}
+        marginX="auto"
+        paddingTop="3em"
+        paddingBottom={"4em"}
+      >
+        <FormLabel marginBottom={"0.5em"} fontWeight="bold" fontSize={"2xl"}>
+          Document Header
         </FormLabel>
-        <Button
-          onClick={addLineItem}
-          leftIcon={<AddIcon />}
-          padding={"22px"}
-          colorScheme="white"
-          bg="black"
-          fontFamily={"sans-serif"}
-        >
-          Add Line Item
-        </Button>
-      </Flex>
-
-      {lineItems.map((_, index) => (
-        <LineItem
-          key={index}
-          formValue={formValue}
-          setFormValue={setFormValue}
-          index={index}
-          lineItems={lineItems}
-          setLineItems={setLineItems}
+        <Input
+          type="text"
+          name="documentType"
+          placeholder="Document Type"
+          size="md"
+          onChange={onInputChange}
+          marginBottom={"15px"}
         />
-      ))}
+        <Input
+          type="text"
+          name="headerText"
+          placeholder="Header Text"
+          size="md"
+          onChange={onInputChange}
+          marginBottom={"15px"}
+        />
+        <FormLabel fontSize={"md"}>Document Date</FormLabel>
+        <Input
+          type="date"
+          name="documentDate"
+          onChange={onInputChange}
+          size="md"
+          marginBottom={"15px"}
+        />
+        <FormLabel fontSize={"md"}>Posting Date</FormLabel>
+        <Input
+          type="date"
+          name="postingDate"
+          size="md"
+          onChange={onInputChange}
+          marginBottom={"15px"}
+        />
 
-      {lineItems.length > 2 && (
-        <Flex align={"center"} justify={"flex-end"} marginTop={"1em"}>
+        <Flex align={"center"} justify={"space-between"} marginTop={"2em"}>
+          <FormLabel fontWeight="bold" fontSize={"2xl"}>
+            Line Items
+          </FormLabel>
           <Button
-            onClick={deleteLineItem}
+            onClick={addLineItem}
             leftIcon={<AddIcon />}
-            padding={"16px"}
+            padding={"22px"}
             colorScheme="white"
-            bg="red"
-            fontFamily={"sans-serif"}
+            bg="#437376"
           >
-            Delete Line Item
+            Add Line Item
           </Button>
         </Flex>
-      )}
 
-      <Button
-        onClick={handleSubmit}
-        fontFamily={"sans-serif"}
-        letterSpacing={"1px"}
-        marginTop={"1.5em"}
-        colorScheme="blue"
-      >
-        Post Entry
-      </Button>
+        {lineItems.map((_, index) => (
+          <LineItem
+            key={index}
+            formValue={formValue}
+            setFormValue={setFormValue}
+            index={index}
+            lineItems={lineItems}
+            setLineItems={setLineItems}
+          />
+        ))}
+
+        {lineItems.length > 2 && (
+          <Flex align={"center"} justify={"flex-end"} marginTop={"1em"}>
+            <Button
+              onClick={deleteLineItem}
+              leftIcon={<AddIcon />}
+              padding={"16px"}
+              colorScheme="white"
+              bg="red"
+            >
+              Delete Line Item
+            </Button>
+          </Flex>
+        )}
+
+        <Button
+          width={"20%"}
+          onClick={handleSubmit}
+          fontSize={"xl"}
+          paddingY={"25px"}
+          letterSpacing={"1px"}
+          marginTop={"1.5em"}
+          bg="#437376"
+          colorScheme="white"
+        >
+          Post Entry
+        </Button>
+      </Box>
     </Box>
   );
 };

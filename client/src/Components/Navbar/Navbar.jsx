@@ -13,10 +13,10 @@ import NavButtons from "./NavButtons";
 import { useSelector } from "react-redux";
 
 const Links = [
-  {
-    linkText: "Admin",
-    linkUrl: "/admin",
-  },
+  // {
+  //   linkText: "Admin",
+  //   linkUrl: "/admin",
+  // },
   {
     linkText: "Entry",
     linkUrl: "/entry",
@@ -29,10 +29,10 @@ const Links = [
     linkText: "Check",
     linkUrl: "/check",
   },
-  {
-    linkText: "Reverse Check",
-    linkUrl: "/reverse_check",
-  },
+  // {
+  //   linkText: "Reverse Check",
+  //   linkUrl: "/reverse_check",
+  // },
 ];
 
 export default function Navbar() {
@@ -43,16 +43,16 @@ export default function Navbar() {
   return (
     <>
       <Box
-        bg="black"
-        px={{ base: "0.5em", md: "3em" }}
+        bg="#518d91"
+        px={{ base: "0.5em", md: "4.5em" }}
         boxShadow="sm"
+        fontFamily="poppins"
         textColor={"white"}
       >
         <Flex
           h={20}
           alignItems={"center"}
           justifyContent={"space-between"}
-          fontFamily="auto"
           fontSize={"lg"}
         >
           <IconButton
@@ -68,7 +68,7 @@ export default function Navbar() {
               fontSize={{ base: "lg", md: "3xl" }}
               marginRight={{ base: "0em", md: "1em" }}
             >
-              <Link to="/">Tripple Entry </Link>
+              <Link to="/">TEA System</Link>
             </Box>
             <HStack
               as={"nav"}

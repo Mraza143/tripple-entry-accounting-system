@@ -30,7 +30,6 @@ const NavButtons = ({ isLoggedIn, isMobileScreen }) => {
           onClick={handleLogoutSubmit}
           fontSize={isMobileScreen ? "sm" : "lg"}
           fontWeight={400}
-          fontFamily="heading"
           variant={"link"}
           to={"/"}
           padding={"7px"}
@@ -40,7 +39,7 @@ const NavButtons = ({ isLoggedIn, isMobileScreen }) => {
             bg: "white.300",
           }}
         >
-          Login out
+          Log out
         </Button>
       ) : (
         <>
@@ -48,7 +47,6 @@ const NavButtons = ({ isLoggedIn, isMobileScreen }) => {
             onClick={() => navigate("/login")}
             fontSize={isMobileScreen ? "sm" : "lg"}
             fontWeight={400}
-            fontFamily="heading"
             variant={"link"}
             to={"/login"}
             textColor="white"
@@ -65,7 +63,6 @@ const NavButtons = ({ isLoggedIn, isMobileScreen }) => {
             }
             fontSize={isMobileScreen ? "sm" : "lg"}
             fontWeight={600}
-            fontFamily="heading"
             color={"black"}
             backgroundColor="white"
             to={"/signup"}

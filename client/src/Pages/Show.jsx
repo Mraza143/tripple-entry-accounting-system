@@ -8,24 +8,17 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
-import { dummyShowData } from "../dummyData";
+// import { dummyShowData } from "../dummyData";
 import axios from "axios";
 
 const Show = () => {
   const [myArray, setMyArray] = useState([]);
   useEffect(() => {
     const fetchAllMySharedFiles = async () => {
-
       const response = await axios.get("http://localhost:5000/api/allEntries");
-      console.log("resp")
+      console.log("resp");
       console.log(response?.data.entries);
-      setMyArray(response?.data.entries)
-
-
-      
-    
-
-
+      setMyArray(response?.data.entries);
     };
 
     fetchAllMySharedFiles();

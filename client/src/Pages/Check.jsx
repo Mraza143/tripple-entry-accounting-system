@@ -11,7 +11,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
-import { dummyCheckData } from "../dummyData";
+// import { dummyCheckData } from "../dummyData";
 import { ethers } from "ethers";
 import TripleEntryAccounting from "../TripleEntryAccounting.json";
 import axios from "axios";
@@ -85,30 +85,34 @@ const Check = () => {
           hash: entry.hashedValue,
         };
       });
-      console.log("norm")
+      console.log("norm");
       console.log(normalizedTxGet);
       const response = await axios.get("http://localhost:5000/api/allEntries");
-      console.log("resp")
+      console.log("resp");
       console.log(response?.data.entries);
 
       const concatenatedAmounts = response?.data.entries.map((entry) => {
         const amounts = entry.lineItems.map((lineItem) => lineItem.amount);
-        return sha256(amounts.join(''));
+        return sha256(amounts.join(""));
       });
-      setHashes(concatenatedAmounts)
-      console.log("conc")
+      setHashes(concatenatedAmounts);
+      console.log("conc");
       console.log(concatenatedAmounts);
 
       const mergedArray = normalizedTxGet.map(({ id: idB, hash: hashB }) => {
-        const { id: idD } = response?.data.entries.find(({ id }) => id === idB) || " ";
-        const hashD = concatenatedAmounts[response?.data.entries.findIndex(({ id }) => id === idB)] || '';
-    
+        const { id: idD } =
+          response?.data.entries.find(({ id }) => id === idB) || " ";
+        const hashD =
+          concatenatedAmounts[
+            response?.data.entries.findIndex(({ id }) => id === idB)
+          ] || "";
+
         return { idB, hashB, hashD, idD };
       });
-    
+
       console.log("mergedArray");
       console.log(mergedArray);
-      setMyArray(mergedArray)
+      setMyArray(mergedArray);
 
       window.ethereum.on("accountsChanged", async () => {
         const accounts = await window.ethereum.request({
@@ -116,7 +120,6 @@ const Check = () => {
         });
         const account = ethers.utils.getAddress(accounts[0]);
       });
-
     };
 
     fetchAllMySharedFiles();
@@ -150,17 +153,11 @@ const Check = () => {
             {myArray.map((data, i) => (
               <Tr key={i}>
                 <Td>{data.idB}</Td>
-                <Td>{data.idD ==  0 ? "" :data.idD }</Td>
-                <Td>{data.hashD }</Td>
+                <Td>{data.idD == 0 ? "" : data.idD}</Td>
+                <Td>{data.hashD}</Td>
                 <Td>{data.hashB}</Td>
-                <Td>
-                  {data.idB === data.idD
-                    ? "true"
-                    : "false"}
-                </Td>
-                <Td>
-                  {data.hashB === data.hashD ? "true" : "false"}
-                </Td>
+                <Td>{data.idB === data.idD ? "true" : "false"}</Td>
+                <Td>{data.hashB === data.hashD ? "true" : "false"}</Td>
               </Tr>
             ))}
           </Tbody>

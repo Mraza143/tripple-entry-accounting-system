@@ -23,7 +23,6 @@ function App() {
         <Route exact path="/show" element={<Show />} />
         <Route exact path="/check" element={<Check />} />
         <Route exact path="/reverse_check" element={<ReverseCheck />} />
-        {/* <Route path="/filesforsale" element={<FilesForSale />} /> */}
       </Routes>
     </div>
   );

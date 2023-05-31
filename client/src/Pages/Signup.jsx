@@ -57,7 +57,7 @@ export default function Signup() {
 
   return (
     <Flex
-      fontFamily={"auto"}
+      fontFamily="poppins"
       minH={"90vh"}
       align={"center"}
       justify={"center"}
@@ -65,7 +65,7 @@ export default function Signup() {
     >
       <Stack spacing={8} mx={"auto"} minW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
-          <Heading fontFamily={"auto"} fontSize={"5xl"} textAlign={"center"}>
+          <Heading fontFamily="poppins" fontSize={"4xl"} textAlign={"center"}>
             Create your account
           </Heading>
         </Stack>
@@ -129,13 +129,10 @@ export default function Signup() {
               <Button
                 onClick={handleSignupSubmit}
                 py={6}
-                fontFamily="heading"
+                fontFamily="poppins"
                 fontSize={"lg"}
-                bg={"black"}
-                color={"white"}
-                _hover={{
-                  bg: "black.500",
-                }}
+                bg="#518d91"
+                colorScheme="white"
               >
                 Sign up
               </Button>

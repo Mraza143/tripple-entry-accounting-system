@@ -4,13 +4,13 @@ const NavLink = ({ data }) => (
   <Link
     px={6}
     py={1}
+    fontWeight="bold"
     fontSize="xl"
     rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      textColor: "black",
-    }}
     to={data.linkUrl}
+    _hover={{ textDecoration: "underline" }}
+    _active={{ color: "gray.300" }}
+    _focus={{ outline: "none" }}
   >
     {data.linkText}
   </Link>

@@ -8,6 +8,7 @@ import {
   Stack,
   Link,
   Button,
+  Image,
   Heading,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -48,16 +49,10 @@ export default function Login() {
   };
 
   return (
-    <Flex
-      fontFamily={"auto"}
-      minH={"88vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
-      <Stack spacing={8} mx={"auto"} minW={"md"} px={6}>
+    <Stack minH={"88vh"} direction={{ base: "column", md: "row" }}>
+      <Stack flex={1} align={"center"} justify={"center"} p={8}>
         <Stack align={"center"}>
-          <Heading fontFamily={"auto"} fontSize={"5xl"}>
+          <Heading fontFamily="poppins" fontSize={"4xl"} textColor="#518d91">
             Sign in to your account
           </Heading>
         </Stack>
@@ -67,6 +62,7 @@ export default function Login() {
           boxShadow={"sm"}
           px={8}
           py={10}
+          width={"85%"}
         >
           <Stack spacing={4}>
             <FormControl id="email" isRequired>
@@ -99,20 +95,20 @@ export default function Login() {
               <Button
                 onClick={handleLoginSubmit}
                 py={6}
-                fontFamily="heading"
+                fontFamily="poppins"
                 fontSize={"lg"}
-                bg={"black"}
-                color={"white"}
-                _hover={{
-                  bg: "black.500",
-                }}
+                bg="#518d91"
+                colorScheme="white"
               >
-                Sign in
+                Login
               </Button>
             </Stack>
           </Stack>
         </Box>
       </Stack>
-    </Flex>
+      <Flex flex={1}>
+        <Image alt={"Login Image"} objectFit={"cover"} src={"/login.png"} />
+      </Flex>
+    </Stack>
   );
 }
