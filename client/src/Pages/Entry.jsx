@@ -145,7 +145,7 @@ const Entry = () => {
   };
 
   return (
-    <Box bg="#f7fafc">
+    <Box>
       <Box
         fontFamily={"poppins"}
         width={"90%"}

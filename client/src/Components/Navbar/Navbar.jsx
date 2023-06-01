@@ -75,9 +75,8 @@ export default function Navbar() {
               spacing={8}
               display={{ base: "none", md: "flex" }}
             >
-              {Links.map((data) => (
-                <NavLink key={data.linkUrl} data={data} />
-              ))}
+              {isLoggedIn &&
+                Links.map((data) => <NavLink key={data.linkUrl} data={data} />)}
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>

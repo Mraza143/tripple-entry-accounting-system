@@ -8,23 +8,25 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
-// import { dummyShowData } from "../dummyData";
 import axios from "axios";
 
 const Show = () => {
   const [myArray, setMyArray] = useState([]);
+  // const [lineItemsArray, setLineItemsArray] = useState([]);
   useEffect(() => {
     const fetchAllMySharedFiles = async () => {
       const response = await axios.get("http://localhost:5000/api/allEntries");
       console.log("resp");
       console.log(response?.data.entries);
+
       setMyArray(response?.data.entries);
+      // setLineItemsArray(response?.data.entries?.lineItems);
     };
 
     fetchAllMySharedFiles();
   }, []);
   return (
-    <Box fontFamily={"auto"} width={"95%"} marginX="auto" marginY="2em">
+    <Box fontFamily={"poppins"} width={"95%"} marginX="auto" paddingY="2em">
       <TableContainer>
         <Table fontSize={"sm"} size="md" variant="simple">
           <Tbody>
@@ -59,6 +61,21 @@ const Show = () => {
                   <Td width={"20%"}>Posting Date:</Td>
                   <Td>{data.postingDate}</Td>
                 </Tr>
+
+                {/* <Tr>
+                  {lineItemsArray.map((item, index) => (
+                    <Box key={index}>
+                      <Td width={"20%"}> Line Item {index}:</Td>
+                      <Td>
+                        GL Code: {item.generalLedger}: Other Expenses | Cost
+                        Center: {item.costCenter}: Production{" "}
+                        {item.lineItemText} | Text: Electricity bill for March
+                        2023 | Amount:{item.amount}
+                      </Td>
+                    </Box>
+                  ))}
+                </Tr> */}
+
                 <Tr>
                   <Td width={"20%"}>Line Item 1:</Td>
                   <Td>

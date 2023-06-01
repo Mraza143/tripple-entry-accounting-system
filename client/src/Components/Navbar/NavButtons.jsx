@@ -2,6 +2,7 @@ import { Button, Stack } from "@chakra-ui/react";
 import { useDispatch /*, useSelector*/ } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setLogout } from "../../redux/features/userSlice";
+import { ConnectWallet } from "@thirdweb-dev/react";
 
 const NavButtons = ({ isLoggedIn, isMobileScreen }) => {
   const navigate = useNavigate();
@@ -26,21 +27,30 @@ const NavButtons = ({ isLoggedIn, isMobileScreen }) => {
       }
     >
       {isLoggedIn ? (
-        <Button
-          onClick={handleLogoutSubmit}
-          fontSize={isMobileScreen ? "sm" : "lg"}
-          fontWeight={400}
-          variant={"link"}
-          to={"/"}
-          padding={"7px"}
-          color={"black"}
-          backgroundColor="white"
-          _hover={{
-            bg: "white.300",
-          }}
-        >
-          Log out
-        </Button>
+        <>
+          <Button
+            onClick={handleLogoutSubmit}
+            fontSize={isMobileScreen ? "sm" : "lg"}
+            fontWeight={400}
+            variant={"link"}
+            to={"/"}
+            padding={"7px"}
+            colorScheme="white"
+            textDecoration={"none"}
+          >
+            Log out
+          </Button>
+
+          <ConnectWallet
+            accentColor="#00c2cf"
+            colorMode="dark"
+            width={{ base: "150px", md: "unset" }}
+            style={{
+              background: "#00c2cf",
+              color: "white",
+            }}
+          />
+        </>
       ) : (
         <>
           <Button
@@ -51,7 +61,7 @@ const NavButtons = ({ isLoggedIn, isMobileScreen }) => {
             to={"/login"}
             textColor="white"
           >
-            Login In
+            Log In
           </Button>
 
           <Button

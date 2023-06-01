@@ -125,8 +125,8 @@ const Check = () => {
     fetchAllMySharedFiles();
   }, []);
   return (
-    <Box fontFamily={"auto"} width={"95%"} marginX="auto" marginY="2em">
-      <Heading fontFamily={"auto"} fontSize={"4xl"}>
+    <Box fontFamily={"poppins"} width={"95%"} marginX="auto" paddingY="2em">
+      <Heading fontFamily={"poppins"} fontSize={"4xl"}>
         Hash Check
       </Heading>
       <Text marginTop={"5px"} fontSize={"xl"}>
@@ -136,17 +136,26 @@ const Check = () => {
       <TableContainer marginTop={"20px"}>
         <Table fontSize={"xs"} size="md" variant={"simple"}>
           <Thead>
-            <Tr bg="#f5f5f5">
-              <Th>
-                Doc. number in <br /> chain
+            <Tr bg="#3e8489">
+              <Th fontFamily={"poppins"} textColor={"white"}>
+                Doc. number <br /> on chain
               </Th>
-              <Th>
-                Doc. number on <br /> database
+              <Th fontFamily={"poppins"} textColor={"white"}>
+                Doc. number <br />
+                on database
               </Th>
-              <Th>Hash generated using database data</Th>
-              <Th>Hash stored on chain</Th>
-              <Th>ID OK?</Th>
-              <Th>Hash OK?</Th>
+              <Th fontFamily={"poppins"} textColor={"white"}>
+                Hash generated using database data
+              </Th>
+              <Th fontFamily={"poppins"} textColor={"white"}>
+                Hash stored on chain
+              </Th>
+              <Th fontFamily={"poppins"} textColor={"white"}>
+                ID OK?
+              </Th>
+              <Th fontFamily={"poppins"} textColor={"white"}>
+                Hash OK?
+              </Th>
             </Tr>
           </Thead>
           <Tbody>

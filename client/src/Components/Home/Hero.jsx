@@ -25,7 +25,7 @@ const Hero = () => {
             fontSize={{ base: "4xl", sm: "4xl", lg: "6xl" }}
           >
             <Text
-              textColor="#00367c"
+              textColor="#335e60"
               as={"span"}
               position={"relative"}
               _after={{
