@@ -2,6 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from "../api.js";
 import Cookies from "js-cookie";
 
+
+const initialUser = Cookies.get("token")
+  ? JSON.parse(Cookies.get("token"))
+  : null;
+
 export const login = createAsyncThunk(
   "user/login",
   async ({ formValue, navigate, toast }, { rejectWithValue }) => {
@@ -33,7 +38,7 @@ export const register = createAsyncThunk(
 const userSlice = createSlice({
   name: "userAuth",
   initialState: {
-    user: null,
+    user: initialUser,
     error: "",
     loading: false,
   },

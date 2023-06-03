@@ -36,6 +36,65 @@ const Show = () => {
       <TableContainer>
         <Table fontSize={"sm"} size="md" variant="simple">
           <Tbody>
+          {myArray.map((item) => (
+
+          <Box key={item.number} marginBottom={"60px"}>
+          <Text
+                  fontSize="2xl"
+                  fontWeight="bold"
+                  marginBottom="15px"
+                  marginLeft="15px"
+                >
+                  Document Number: {item.id}
+                </Text>
+                <Tr>
+                  <Td width={"20%"}>Document Header:</Td>
+                  <Td>{item.headerText}</Td>
+                </Tr>
+                <Tr>
+                  <Td width={"20%"}>Document Type:</Td>
+                  <Td>{item.documentType}</Td>
+                </Tr>
+
+                <Tr>
+                  <Td width={"20%"}>Entry Date:</Td>
+                  <Td>{item.documentDate}</Td>
+                </Tr>
+                <Tr>
+                  <Td width={"20%"}>Last Modified:</Td>
+                  <Td>{item.updatedAt}</Td>
+                </Tr>
+                <Tr>
+                  <Td width={"20%"}>Posting Date:</Td>
+                  <Td>{item.postingDate}</Td>
+                </Tr>
+          <ul>
+            {item.lineItems.map((obj, index) => (
+              <Box key={index}>
+              <Td width={"20%"}> Line Item {index}:</Td>
+              <Td>
+                GL Code: {obj.generalLedger}: Other Expenses | Cost
+                Center: {obj.costCenter}: Production{" "}
+                {obj.lineItemText} | Text: Electricity bill for March
+                2023 | Amount:{obj.amount}
+              </Td>
+            </Box>
+            ))}
+          </ul>
+          </Box>
+
+
+      ))}
+
+          </Tbody>
+        </Table>
+      </TableContainer>
+    </Box>
+  );
+};
+
+export default Show;
+/*
             {myArray.map((data, i) => (
               <Box key={i} marginBottom={"60px"}>
                 <Text
@@ -57,7 +116,7 @@ const Show = () => {
 
                 <Tr>
                   <Td width={"20%"}>Entry Date:</Td>
-                  <Td>{data.docEntryDate}</Td>
+                  <Td>{data.documentDate}</Td>
                 </Tr>
                 <Tr>
                   <Td width={"20%"}>Last Modified:</Td>
@@ -68,8 +127,8 @@ const Show = () => {
                   <Td>{data.postingDate}</Td>
                 </Tr>
 
-                {/* <Tr>
-                  {lineItemsArray.map((item, index) => (
+                 <Tr>
+                  {data.lineItems.map((item, index) => (
                     <Box key={index}>
                       <Td width={"20%"}> Line Item {index}:</Td>
                       <Td>
@@ -80,9 +139,9 @@ const Show = () => {
                       </Td>
                     </Box>
                   ))}
-                </Tr> */}
+                </Tr> 
 
-                <Tr>
+                {/*<Tr>
                   <Td width={"20%"}>Line Item 1:</Td>
                   <Td>
                     GL Code: 40000244: Other Expenses | Cost Center: 10010:
@@ -97,18 +156,11 @@ const Show = () => {
                     Production A | Text: Electricity bill for March 2023 |
                     Amount:100000
                   </Td>
-                </Tr>
-                <Tr>
-                  <Td width={"20%"}>Trebit (Blockhain ID):</Td>
-                  <Td>{data.docTrebit}</Td>
-                </Tr>
-              </Box>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
-    </Box>
-  );
-};
-
-export default Show;
+              </Tr>}
+              <Tr>
+              <Td width={"20%"}>Trebit (Blockhain ID):</Td>
+              <Td>{data.id}</Td>
+            </Tr>
+          </Box>
+        ))}
+*/
