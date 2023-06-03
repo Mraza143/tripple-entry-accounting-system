@@ -49,7 +49,11 @@ export default function Login() {
   };
 
   return (
-    <Stack minH={"88vh"} direction={{ base: "column", md: "row" }}>
+    <Stack
+      minH={"88vh"}
+      direction={{ base: "column", md: "row" }}
+      marginTop={"78px"}
+    >
       <Stack flex={1} align={"center"} justify={"center"} p={8}>
         <Stack align={"center"}>
           <Heading fontFamily="poppins" fontSize={"4xl"} textColor="#518d91">

@@ -6,3 +6,36 @@ body {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
+.all_entries_scrollbar {
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #00000020 transparent; /* Color of the scrollbar track and thumb */
+  overflow-y: scroll; /* Show scrollbar */
+}
+
+.all_entries_scrollbar::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.all_entries_scrollbar::-webkit-scrollbar-track {
+  background-color: transparent; /* Background color of the scrollbar track */
+}
+
+.all_entries_scrollbar::-webkit-scrollbar-thumb {
+  background-color: #00000020; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Border radius of the scrollbar thumb */
+}
+
+::-webkit-scrollbar {
+  width: 6px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent; /* Background color of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4e4e4e69; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Border radius of the scrollbar thumb */
+  cursor: pointer !important;
+}

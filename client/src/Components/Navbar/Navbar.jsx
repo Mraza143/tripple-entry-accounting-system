@@ -43,11 +43,17 @@ export default function Navbar() {
   return (
     <>
       <Box
+        position="fixed"
+        top={0}
+        left={0}
         bg="#518d91"
         px={{ base: "0.5em", md: "4.5em" }}
+        py={{ base: "unset", md: "0" }}
         boxShadow="sm"
         fontFamily="poppins"
         textColor={"white"}
+        width={"full"}
+        zIndex={10}
       >
         <Flex
           h={20}

@@ -152,6 +152,7 @@ const Entry = () => {
         marginX="auto"
         paddingTop="3em"
         paddingBottom={"4em"}
+        marginTop={"78px"}
       >
         <FormLabel marginBottom={"0.5em"} fontWeight="bold" fontSize={"2xl"}>
           Document Header
@@ -230,12 +231,12 @@ const Entry = () => {
         )}
 
         <Button
-          width={"20%"}
+          width={"13%"}
           onClick={handleSubmit}
-          fontSize={"xl"}
-          paddingY={"25px"}
+          paddingY={"22px"}
           letterSpacing={"1px"}
           marginTop={"1.5em"}
+          fontFamily={"poppins"}
           bg="#437376"
           colorScheme="white"
         >

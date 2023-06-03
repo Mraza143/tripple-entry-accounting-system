@@ -26,7 +26,13 @@ const Show = () => {
     fetchAllMySharedFiles();
   }, []);
   return (
-    <Box fontFamily={"poppins"} width={"95%"} marginX="auto" paddingY="2em">
+    <Box
+      fontFamily={"poppins"}
+      width={"95%"}
+      marginX="auto"
+      paddingY="2em"
+      marginTop={"78px"}
+    >
       <TableContainer>
         <Table fontSize={"sm"} size="md" variant="simple">
           <Tbody>

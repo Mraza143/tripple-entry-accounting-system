@@ -125,7 +125,13 @@ const Check = () => {
     fetchAllMySharedFiles();
   }, []);
   return (
-    <Box fontFamily={"poppins"} width={"95%"} marginX="auto" paddingY="2em">
+    <Box
+      fontFamily={"poppins"}
+      width={"95%"}
+      marginX="auto"
+      paddingY="2em"
+      marginTop={"78px"}
+    >
       <Heading fontFamily={"poppins"} fontSize={"4xl"}>
         Hash Check
       </Heading>

@@ -1,6 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Pages/Home";
 import Entry from "./Pages/Entry";
@@ -9,10 +9,15 @@ import ReverseCheck from "./Pages/ReverseCheck";
 import Show from "./Pages/Show";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
+import Dashboard from "./Pages/Dashboard";
+import { Box } from "@chakra-ui/react";
 
 function App() {
+  // const location = useLocation();
+  // const hideNavbar = location.pathname === "/dashboard";
   return (
-    <div>
+    <Box>
+      {/* {!hideNavbar && <Navbar />} */}
       <Navbar />
       <ToastContainer position="top-center" autoClose={3000} />
       <Routes>
@@ -23,8 +28,9 @@ function App() {
         <Route exact path="/show" element={<Show />} />
         <Route exact path="/check" element={<Check />} />
         <Route exact path="/reverse_check" element={<ReverseCheck />} />
+        <Route exact path="/dashboard" element={<Dashboard />} />
       </Routes>
-    </div>
+    </Box>
   );
 }
 
