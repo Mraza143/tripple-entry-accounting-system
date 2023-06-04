@@ -28,64 +28,111 @@ const Show = () => {
   return (
     <Box
       fontFamily={"poppins"}
-      width={"95%"}
+      minH="100vh"
+      width={"90%"}
       marginX="auto"
       paddingY="2em"
       marginTop={"78px"}
     >
       <TableContainer>
-        <Table fontSize={"sm"} size="md" variant="simple">
+        <Table fontSize={"md"} size="md" variant="simple">
           <Tbody>
-          {myArray.map((item) => (
-
-          <Box key={item.number} marginBottom={"60px"}>
-          <Text
-                  fontSize="2xl"
-                  fontWeight="bold"
+            {myArray.map((item) => (
+              <Box key={item.number} marginBottom={"60px"}>
+                <Text
+                  fontFamily="Lobster Two"
+                  textColor={"#4c797c"}
+                  fontSize="4xl"
+                  fontWeight={"bold"}
                   marginBottom="15px"
-                  marginLeft="15px"
                 >
                   Document Number: {item.id}
                 </Text>
                 <Tr>
-                  <Td width={"20%"}>Document Header:</Td>
+                  <Td
+                    bg={"#518d91"}
+                    textColor="white"
+                    border={"1px"}
+                    borderColor="white"
+                    width={"20%"}
+                  >
+                    Document Header:
+                  </Td>
                   <Td>{item.headerText}</Td>
                 </Tr>
                 <Tr>
-                  <Td width={"20%"}>Document Type:</Td>
+                  <Td
+                    bg={"#518d91"}
+                    textColor="white"
+                    border={"1px"}
+                    borderColor="white"
+                    width={"20%"}
+                  >
+                    Document Type:
+                  </Td>
                   <Td>{item.documentType}</Td>
                 </Tr>
 
                 <Tr>
-                  <Td width={"20%"}>Entry Date:</Td>
+                  <Td
+                    bg={"#518d91"}
+                    textColor="white"
+                    border={"1px"}
+                    borderColor="white"
+                    width={"20%"}
+                  >
+                    Entry Date:
+                  </Td>
                   <Td>{item.documentDate}</Td>
                 </Tr>
                 <Tr>
-                  <Td width={"20%"}>Last Modified:</Td>
+                  <Td
+                    bg={"#518d91"}
+                    textColor="white"
+                    border={"1px"}
+                    borderColor="white"
+                    width={"20%"}
+                  >
+                    Last Modified:
+                  </Td>
                   <Td>{item.updatedAt}</Td>
                 </Tr>
                 <Tr>
-                  <Td width={"20%"}>Posting Date:</Td>
+                  <Td
+                    bg={"#518d91"}
+                    textColor="white"
+                    border={"1px"}
+                    borderColor="white"
+                    width={"20%"}
+                  >
+                    Posting Date:
+                  </Td>
                   <Td>{item.postingDate}</Td>
                 </Tr>
-          <ul>
-            {item.lineItems.map((obj, index) => (
-              <Box key={index}>
-              <Td width={"20%"}> Line Item {index}:</Td>
-              <Td>
-                GL Code: {obj.generalLedger}: Other Expenses | Cost
-                Center: {obj.costCenter}: Production{" "}
-                {obj.lineItemText} | Text: Electricity bill for March
-                2023 | Amount:{obj.amount}
-              </Td>
-            </Box>
+                <ul>
+                  {item.lineItems.map((obj, index) => (
+                    <Box key={index}>
+                      <Td
+                        bg={"#518d91"}
+                        textColor="white"
+                        border={"1px"}
+                        borderColor="white"
+                        width={"200px"}
+                      >
+                        {" "}
+                        Line Item {index}:
+                      </Td>
+                      <Td>
+                        GL Code: {obj.generalLedger}: Other Expenses | Cost
+                        Center: {obj.costCenter}: Production {obj.lineItemText}{" "}
+                        | Text: Electricity bill for March 2023 | Amount:
+                        {obj.amount}
+                      </Td>
+                    </Box>
+                  ))}
+                </ul>
+              </Box>
             ))}
-          </ul>
-          </Box>
-
-
-      ))}
-
           </Tbody>
         </Table>
       </TableContainer>
@@ -94,73 +141,3 @@ const Show = () => {
 };
 
 export default Show;
-/*
-            {myArray.map((data, i) => (
-              <Box key={i} marginBottom={"60px"}>
-                <Text
-                  fontSize="2xl"
-                  fontWeight="bold"
-                  marginBottom="15px"
-                  marginLeft="15px"
-                >
-                  Document Number: {data.id}
-                </Text>
-                <Tr>
-                  <Td width={"20%"}>Document Header:</Td>
-                  <Td>{data.headerText}</Td>
-                </Tr>
-                <Tr>
-                  <Td width={"20%"}>Document Type:</Td>
-                  <Td>{data.documentType}</Td>
-                </Tr>
-
-                <Tr>
-                  <Td width={"20%"}>Entry Date:</Td>
-                  <Td>{data.documentDate}</Td>
-                </Tr>
-                <Tr>
-                  <Td width={"20%"}>Last Modified:</Td>
-                  <Td>{data.updatedAt}</Td>
-                </Tr>
-                <Tr>
-                  <Td width={"20%"}>Posting Date:</Td>
-                  <Td>{data.postingDate}</Td>
-                </Tr>
-
-                 <Tr>
-                  {data.lineItems.map((item, index) => (
-                    <Box key={index}>
-                      <Td width={"20%"}> Line Item {index}:</Td>
-                      <Td>
-                        GL Code: {item.generalLedger}: Other Expenses | Cost
-                        Center: {item.costCenter}: Production{" "}
-                        {item.lineItemText} | Text: Electricity bill for March
-                        2023 | Amount:{item.amount}
-                      </Td>
-                    </Box>
-                  ))}
-                </Tr> 
-
-                {/*<Tr>
-                  <Td width={"20%"}>Line Item 1:</Td>
-                  <Td>
-                    GL Code: 40000244: Other Expenses | Cost Center: 10010:
-                    Production A | Text: Electricity bill for March 2023 |
-                    Amount:100000
-                  </Td>
-                </Tr>
-                <Tr>
-                  <Td width={"20%"}>Line Item 2:</Td>
-                  <Td>
-                    GL Code: 40000244: Other Expenses | Cost Center: 10010:
-                    Production A | Text: Electricity bill for March 2023 |
-                    Amount:100000
-                  </Td>
-              </Tr>}
-              <Tr>
-              <Td width={"20%"}>Trebit (Blockhain ID):</Td>
-              <Td>{data.id}</Td>
-            </Tr>
-          </Box>
-        ))}
-*/

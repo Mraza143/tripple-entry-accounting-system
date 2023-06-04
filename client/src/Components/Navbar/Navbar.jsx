@@ -5,9 +5,10 @@ import {
   IconButton,
   useDisclosure,
   Stack,
+  Text,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import NavLink from "./NavLink";
 import NavButtons from "./NavButtons";
 import { useSelector } from "react-redux";
@@ -36,6 +37,7 @@ const Links = [
 ];
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.userAuth.user !== null);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -69,12 +71,32 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={{ base: 1, md: 8 }} alignItems={"center"}>
-            <Box
-              fontWeight="bold"
-              fontSize={{ base: "lg", md: "3xl" }}
-              marginRight={{ base: "0em", md: "1em" }}
-            >
-              <Link to="/">TEA System</Link>
+            <Box fontWeight="bold" marginRight={{ base: "0em", md: "1em" }}>
+              <Box
+                cursor="pointer"
+                onClick={() => navigate("/")}
+                height={"60px"}
+                display="flex"
+                alignItems="center"
+              >
+                <img
+                  src={"/logo__navbar.png"}
+                  alt="Company logo for navigation bar"
+                  style={{
+                    width: "55px",
+                    height: "50px",
+                    objectFit: "contain",
+                  }}
+                />
+                <Text
+                  fontSize="3xl"
+                  fontStyle="italic"
+                  letterSpacing="1px"
+                  fontFamily="Lobster Two"
+                >
+                  TEA System
+                </Text>
+              </Box>
             </Box>
             <HStack
               as={"nav"}

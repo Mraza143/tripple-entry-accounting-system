@@ -23,7 +23,12 @@ const LineItem = ({
 
   return (
     <>
-      <FormLabel fontSize={"md"} marginTop={"1em"}>
+      <FormLabel
+        fontSize={"lg"}
+        fontWeight={"bold"}
+        marginTop={"1em"}
+        textColor={"#4c797c"}
+      >
         Item {index + 1}
       </FormLabel>
       <Input
@@ -154,7 +159,13 @@ const Entry = () => {
         paddingBottom={"4em"}
         marginTop={"78px"}
       >
-        <FormLabel marginBottom={"0.5em"} fontWeight="bold" fontSize={"2xl"}>
+        <FormLabel
+          marginBottom={"0.5em"}
+          fontWeight="bold"
+          fontSize={"4xl"}
+          fontFamily="Lobster Two"
+          textColor={"#4c797c"}
+        >
           Document Header
         </FormLabel>
         <Input
@@ -173,7 +184,9 @@ const Entry = () => {
           onChange={onInputChange}
           marginBottom={"15px"}
         />
-        <FormLabel fontSize={"md"}>Document Date</FormLabel>
+        <FormLabel fontSize={"md"} textColor={"#4c797c"}>
+          Document Date
+        </FormLabel>
         <Input
           type="date"
           name="documentDate"
@@ -181,7 +194,9 @@ const Entry = () => {
           size="md"
           marginBottom={"15px"}
         />
-        <FormLabel fontSize={"md"}>Posting Date</FormLabel>
+        <FormLabel fontSize={"md"} textColor={"#4c797c"}>
+          Posting Date
+        </FormLabel>
         <Input
           type="date"
           name="postingDate"
@@ -191,7 +206,12 @@ const Entry = () => {
         />
 
         <Flex align={"center"} justify={"space-between"} marginTop={"2em"}>
-          <FormLabel fontWeight="bold" fontSize={"2xl"}>
+          <FormLabel
+            fontSize={"4xl"}
+            fontFamily="Lobster Two"
+            textColor={"#4c797c"}
+            fontWeight="bold"
+          >
             Line Items
           </FormLabel>
           <Button
@@ -200,6 +220,7 @@ const Entry = () => {
             padding={"22px"}
             colorScheme="white"
             bg="#437376"
+            fontFamily={"poppins"}
           >
             Add Line Item
           </Button>
@@ -224,6 +245,7 @@ const Entry = () => {
               padding={"16px"}
               colorScheme="white"
               bg="red"
+              fontFamily={"poppins"}
             >
               Delete Line Item
             </Button>
@@ -236,9 +258,9 @@ const Entry = () => {
           paddingY={"22px"}
           letterSpacing={"1px"}
           marginTop={"1.5em"}
-          fontFamily={"poppins"}
           bg="#437376"
           colorScheme="white"
+          fontFamily="poppins"
         >
           Post Entry
         </Button>

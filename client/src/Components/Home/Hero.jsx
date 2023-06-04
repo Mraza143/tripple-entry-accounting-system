@@ -22,10 +22,12 @@ const Hero = () => {
           <Heading
             lineHeight={1.1}
             fontWeight={600}
-            fontSize={{ base: "4xl", sm: "4xl", lg: "6xl" }}
+            fontSize={{ base: "6xl", sm: "4xl", lg: "6xl" }}
           >
             <Text
               textColor="#335e60"
+              fontSize="80px"
+              fontFamily="Lobster Two"
               as={"span"}
               position={"relative"}
               _after={{
@@ -42,11 +44,16 @@ const Hero = () => {
               Blockchain based,
             </Text>
             <br />
-            <Text fontSize="6xl" as={"span"} color={"#43a2a7"}>
+            <Text
+              fontFamily="Lobster Two"
+              fontSize="50px"
+              as={"span"}
+              color={"#43a2a7"}
+            >
               Triple Entry Accounting System
             </Text>
           </Heading>
-          <Text color={"gray.500"}>
+          <Text fontFamily="poppins" color={"gray.400"}>
             Welcome to the future of accounting with our revolutionary Triple
             Entry Accounting System! Say goodbye to the limitations of
             traditional double-entry accounting and embrace a new era of
@@ -60,6 +67,7 @@ const Hero = () => {
           >
             <Button
               rounded={"full"}
+              fontFamily="poppins"
               size={"lg"}
               fontWeight={"normal"}
               px={6}
@@ -69,7 +77,13 @@ const Hero = () => {
             >
               Get started
             </Button>
-            <Button rounded={"full"} size={"lg"} fontWeight={"normal"} px={6}>
+            <Button
+              rounded={"full"}
+              size={"lg"}
+              fontWeight={"normal"}
+              px={6}
+              fontFamily="poppins"
+            >
               How It Works
             </Button>
           </Stack>
@@ -83,7 +97,7 @@ const Hero = () => {
         >
           <Box
             position={"relative"}
-            height={"350px"}
+            height={"420px"}
             rounded={"2xl"}
             boxShadow={"sm"}
             width={"full"}

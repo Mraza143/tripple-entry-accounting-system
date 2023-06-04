@@ -8,6 +8,7 @@ import {
   Stack,
   StackDivider,
   Icon,
+  Box,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { IoSearchSharp } from "react-icons/io5";
@@ -28,9 +29,7 @@ const Feature = ({ text, icon, iconBg }) => {
       >
         {icon}
       </Flex>
-      <Text fontSize={"md"} fontWeight={600}>
-        {text}
-      </Text>
+      <Text fontSize={"md"}>{text}</Text>
     </Stack>
   );
 };
@@ -39,12 +38,17 @@ export default function Use() {
   return (
     <Container maxW={"5xl"} pt={20} pb={40}>
       <SimpleGrid columns={{ base: 1, md: 2 }}>
-        <Stack>
-          <Heading>How to use this system?</Heading>
-          <Text color={"gray.500"} fontSize={"lg"}>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore
-          </Text>
+        <Stack fontFamily="poppins">
+          <Box mb={25}>
+            <Heading fontFamily="poppins" mb={5} fontSize={"4xl"}>
+              How to use this system?
+            </Heading>
+            <Text color={"gray.500"} fontSize={"sm"}>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              nonumy eirmod tempor invidunt ut labore Lorem ipsum dolor sit
+              amet, consetetur sadipscing elitr
+            </Text>
+          </Box>
           <Stack
             spacing={4}
             divider={

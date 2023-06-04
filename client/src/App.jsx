@@ -2,6 +2,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
+import Footer from "./Components/Footer/Footer";
 import Home from "./Pages/Home";
 import Entry from "./Pages/Entry";
 import Check from "./Pages/Check";
@@ -13,8 +14,8 @@ import Dashboard from "./Pages/Dashboard";
 import { Box } from "@chakra-ui/react";
 
 function App() {
-  // const location = useLocation();
-  // const hideNavbar = location.pathname === "/dashboard";
+  const location = useLocation();
+  const hideFooter = location.pathname === "/dashboard";
   return (
     <Box>
       {/* {!hideNavbar && <Navbar />} */}
@@ -30,6 +31,7 @@ function App() {
         <Route exact path="/reverse_check" element={<ReverseCheck />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
       </Routes>
+      {!hideFooter && <Footer />}
     </Box>
   );
 }

@@ -50,13 +50,19 @@ export default function Login() {
 
   return (
     <Stack
-      minH={"88vh"}
+      minH={"100vh"}
       direction={{ base: "column", md: "row" }}
       marginTop={"78px"}
+      fontFamily="poppins"
     >
-      <Stack flex={1} align={"center"} justify={"center"} p={8}>
+      <Stack flex={1} align={"center"} justify={"center"} p={6} bg="#f7fafc">
         <Stack align={"center"}>
-          <Heading fontFamily="poppins" fontSize={"4xl"} textColor="#518d91">
+          <Heading
+            fontFamily="Lobster Two"
+            fontSize={"5xl"}
+            textColor="#4c797c"
+            mb={5}
+          >
             Sign in to your account
           </Heading>
         </Stack>

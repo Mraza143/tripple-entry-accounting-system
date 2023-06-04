@@ -128,38 +128,56 @@ const Check = () => {
     <Box
       fontFamily={"poppins"}
       width={"95%"}
+      minH="100vh"
       marginX="auto"
-      paddingY="2em"
+      paddingTop={5}
+      paddingBottom={12}
       marginTop={"78px"}
     >
-      <Heading fontFamily={"poppins"} fontSize={"4xl"}>
-        Hash Check
-      </Heading>
-      <Text marginTop={"5px"} fontSize={"xl"}>
-        Database to Chain
-      </Text>
+      <Box display={"flex"} alignItems={"center"} gap={5} my={5}>
+        <Heading
+          fontFamily="Lobster Two"
+          textColor={"#4c797c"}
+          fontSize={"5xl"}
+        >
+          Hash Check
+        </Heading>
+        <Text textColor={"#4c797c"} fontWeight={"bold"} fontSize={"xl"}>
+          (Database to Chain)
+        </Text>
+      </Box>
 
       <TableContainer marginTop={"20px"}>
-        <Table fontSize={"xs"} size="md" variant={"simple"}>
+        <Table fontSize={"sm"} size="md" variant={"simple"}>
           <Thead>
-            <Tr bg="#3e8489">
-              <Th fontFamily={"poppins"} textColor={"white"}>
-                Doc. number <br /> on chain
+            <Tr borderRadius={"5px"} bg="#3e8489">
+              <Th
+                fontSize={"md"}
+                px={2}
+                py={5}
+                fontFamily={"poppins"}
+                textColor={"white"}
+              >
+                ID (Chain)
               </Th>
-              <Th fontFamily={"poppins"} textColor={"white"}>
-                Doc. number <br />
-                on database
+              <Th
+                px={2}
+                fontSize={"md"}
+                fontFamily={"poppins"}
+                textColor={"white"}
+              >
+                ID (Database)
               </Th>
-              <Th fontFamily={"poppins"} textColor={"white"}>
+              <Th fontSize={"md"} fontFamily={"poppins"} textColor={"white"}>
                 Hash generated using database data
               </Th>
-              <Th fontFamily={"poppins"} textColor={"white"}>
+              <Th fontSize={"md"} fontFamily={"poppins"} textColor={"white"}>
                 Hash stored on chain
               </Th>
-              <Th fontFamily={"poppins"} textColor={"white"}>
+              <Th fontSize={"md"} fontFamily={"poppins"} textColor={"white"}>
                 ID OK?
               </Th>
-              <Th fontFamily={"poppins"} textColor={"white"}>
+              <Th fontSize={"md"} fontFamily={"poppins"} textColor={"white"}>
                 Hash OK?
               </Th>
             </Tr>
@@ -168,7 +186,7 @@ const Check = () => {
             {myArray.map((data, i) => (
               <Tr key={i}>
                 <Td>{data.idB}</Td>
-                <Td>{data.idD == 0 ? "" : data.idD}</Td>
+                <Td>{data.idD === 0 ? "" : data.idD}</Td>
                 <Td>{data.hashD}</Td>
                 <Td>{data.hashB}</Td>
                 <Td>{data.idB === data.idD ? "true" : "false"}</Td>

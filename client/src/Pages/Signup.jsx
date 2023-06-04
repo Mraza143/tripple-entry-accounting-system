@@ -58,7 +58,7 @@ export default function Signup() {
   return (
     <Flex
       fontFamily="poppins"
-      minH={"90vh"}
+      minH={"100vh"}
       align={"center"}
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
@@ -66,7 +66,12 @@ export default function Signup() {
     >
       <Stack spacing={8} mx={"auto"} minW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
-          <Heading fontFamily="poppins" fontSize={"4xl"} textAlign={"center"}>
+          <Heading
+            fontFamily="Lobster Two"
+            fontSize={"5xl"}
+            textColor="#4c797c"
+            textAlign={"center"}
+          >
             Create your account
           </Heading>
         </Stack>
@@ -118,6 +123,7 @@ export default function Signup() {
               </InputGroup>
             </FormControl>
             <Select
+              cursor="pointer"
               name="role"
               value={role}
               onChange={onInputChange}

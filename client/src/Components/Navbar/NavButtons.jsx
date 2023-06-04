@@ -73,7 +73,7 @@ const NavButtons = ({ isLoggedIn, isMobileScreen }) => {
             }
             fontSize={isMobileScreen ? "sm" : "lg"}
             fontWeight={600}
-            color={"black"}
+            color={"#4c797c"}
             backgroundColor="white"
             to={"/signup"}
             _hover={{

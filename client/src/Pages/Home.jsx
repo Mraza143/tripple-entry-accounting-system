@@ -5,7 +5,7 @@ import { Box } from "@chakra-ui/react";
 
 const Home = () => {
   return (
-    <Box marginTop={"78px"}>
+    <Box marginTop={"70px"}>
       <Hero />
       <Use />
     </Box>

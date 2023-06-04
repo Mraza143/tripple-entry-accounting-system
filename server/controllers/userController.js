@@ -16,15 +16,14 @@ export const loginUser = async (req, res) => {
 
     if (!isPasswordCorrect)
       return res.status(400).json({ message: "Invalid credentials" });
-    console.log(process.env.JWT_SECRET)
+    console.log(process.env.JWT_SECRET);
     const token = jwt.sign(
-      { email: oldUser.email, id: oldUser._id  , role : oldUser.role},
+      { email: oldUser.email, id: oldUser._id, role: oldUser.role },
       process.env.JWT_SECRET,
       {
         expiresIn: process.env.JWT_EXPIRESIN,
       }
     );
-    console.log(token)
 
     res.status(200).json({ result: oldUser, token });
   } catch (error) {
@@ -52,7 +51,7 @@ export const registerUser = async (req, res) => {
     });
 
     const token = jwt.sign(
-      { email: result.email, id: result._id  , role : result.role},
+      { email: result.email, id: result._id, role: result.role },
       process.env.JWT_SECRET,
       {
         expiresIn: process.env.JWT_EXPIRESIN,
