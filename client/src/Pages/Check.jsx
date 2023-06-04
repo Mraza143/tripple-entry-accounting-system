@@ -87,7 +87,9 @@ const Check = () => {
       });
       console.log("norm");
       console.log(normalizedTxGet);
-      const response = await axios.get("https://nice-erin-clam.cyclic.app/api/allEntries");
+      const response = await axios.get(
+        "https://nice-erin-clam.cyclic.app/api/allEntries"
+      );
       console.log("resp");
       console.log(response?.data.entries);
 
@@ -186,7 +188,7 @@ const Check = () => {
             {myArray.map((data, i) => (
               <Tr key={i}>
                 <Td>{data.idB}</Td>
-                <Td>{data.idD === 0 ? "" : data.idD}</Td>
+                <Td>{data.idD === "" ? "null" : data.idD}</Td>
                 <Td>{data.hashD}</Td>
                 <Td>{data.hashB}</Td>
                 <Td>{data.idB === data.idD ? "true" : "false"}</Td>
