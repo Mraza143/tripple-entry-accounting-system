@@ -424,3 +424,71 @@ export const dummyShowData = [
     ],
   },
 ];
+
+export const dummyUserData = [
+  {
+    name: "Shayan",
+    email: "shayan@gmail.com",
+    role: "admin",
+  },
+  {
+    name: "Shayan",
+    email: "shayan@gmail.com",
+    role: "admin",
+  },
+  {
+    name: "Shayan",
+    email: "shayan@gmail.com",
+    role: "admin",
+  },
+  {
+    name: "Shayan",
+    email: "shayan@gmail.com",
+    role: "admin",
+  },
+  {
+    name: "Shayan",
+    email: "shayan@gmail.com",
+    role: "admin",
+  },
+  {
+    name: "Shayan",
+    email: "shayan@gmail.com",
+    role: "admin",
+  },
+  {
+    name: "Shayan",
+    email: "shayan@gmail.com",
+    role: "admin",
+  },
+  {
+    name: "Shayan",
+    email: "shayan@gmail.com",
+    role: "admin",
+  },
+  {
+    name: "Shayan",
+    email: "shayan@gmail.com",
+    role: "admin",
+  },
+  {
+    name: "Shayan",
+    email: "shayan@gmail.com",
+    role: "admin",
+  },
+  {
+    name: "Shayan",
+    email: "shayan@gmail.com",
+    role: "admin",
+  },
+  {
+    name: "Shayan",
+    email: "shayan@gmail.com",
+    role: "admin",
+  },
+  {
+    name: "Shayan",
+    email: "shayan@gmail.com",
+    role: "admin",
+  },
+];

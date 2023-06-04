@@ -9,6 +9,7 @@ import {
   TableContainer,
   Text,
   Button,
+  Heading,
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
@@ -51,9 +52,9 @@ const AllEntries = () => {
 
   return (
     <Box>
-      <Text fontSize={"3xl"} marginBottom={5}>
+      <Heading fontSize={"3xl"} fontFamily={"poppins"} marginBottom={5}>
         All Entries
-      </Text>
+      </Heading>
       <TableContainer fontFamily={"poppins"}>
         <Table variant="simple" fontSize="xs">
           <Thead>

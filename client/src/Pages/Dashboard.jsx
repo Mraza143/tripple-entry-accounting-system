@@ -24,8 +24,8 @@ const Dashboard = () => {
 
       <Box
         width={"full"}
-        paddingY={5}
-        paddingX={3}
+        paddingY={8}
+        paddingX={5}
         overflowX={"auto"}
         // maxHeight={"90vh"}
         minHeight={"100%"}
