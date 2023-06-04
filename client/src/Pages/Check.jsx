@@ -87,7 +87,7 @@ const Check = () => {
       });
       console.log("norm");
       console.log(normalizedTxGet);
-      const response = await axios.get("http://localhost:5000/api/allEntries");
+      const response = await axios.get("https://nice-erin-clam.cyclic.app/api/allEntries");
       console.log("resp");
       console.log(response?.data.entries);
 

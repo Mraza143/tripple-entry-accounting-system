@@ -15,7 +15,7 @@ const Show = () => {
   // const [lineItemsArray, setLineItemsArray] = useState([]);
   useEffect(() => {
     const fetchAllMySharedFiles = async () => {
-      const response = await axios.get("http://localhost:5000/api/allEntries");
+      const response = await axios.get("https://nice-erin-clam.cyclic.app/api/allEntries");
       console.log("resp");
       console.log(response?.data.entries);
 
