@@ -26,18 +26,19 @@ const initialState = {
   email: "",
   password: "",
   role: "",
+  avatar: "",
 };
 
 export default function Signup() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const [formValue, setFormValue] = useState(initialState);
   const { /*loading ,*/ error } = useSelector((state) => ({
     ...state.userAuth,
   }));
-  const { name, email, password, role } = formValue;
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { name, email, password, role, avatar } = formValue;
 
   useEffect(() => {
     error && toast.error(error);
@@ -46,13 +47,26 @@ export default function Signup() {
   const handleSignupSubmit = (e) => {
     e.preventDefault();
 
-    if (name && email && password && role) {
+    if (name && email && password && role && avatar) {
       dispatch(register({ formValue, navigate, toast }));
     }
   };
   const onInputChange = (e) => {
     let { name, value } = e.target;
-    setFormValue({ ...formValue, [name]: value });
+
+    if (name === "avatar") {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setFormValue({ ...formValue, [name]: reader.result });
+        }
+      };
+
+      reader.readAsDataURL(e.target.files[0]);
+    } else {
+      setFormValue({ ...formValue, [name]: value });
+    }
   };
 
   return (
@@ -132,6 +146,15 @@ export default function Signup() {
               <option value="user">User</option>
               <option value="admin">Admin</option>
             </Select>
+            <FormControl id="file" isRequired>
+              <FormLabel>Upload Image</FormLabel>
+              <Input
+                cursor="pointer"
+                type="file"
+                name="avatar"
+                onChange={onInputChange}
+              />
+            </FormControl>
             <Stack spacing={10} pt={2}>
               <Button
                 onClick={handleSignupSubmit}

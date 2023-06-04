@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import cloudinary from "cloudinary";
 
 import UserModal from "../models/userModel.js";
 
@@ -33,6 +34,12 @@ export const loginUser = async (req, res) => {
 };
 
 export const registerUser = async (req, res) => {
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  });
+
   const { name, email, password, role } = req.body;
   try {
     const oldUser = await UserModal.findOne({ email });
@@ -48,6 +55,10 @@ export const registerUser = async (req, res) => {
       email,
       password: hashedPassword,
       role,
+      avatar: {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      },
     });
 
     const token = jwt.sign(

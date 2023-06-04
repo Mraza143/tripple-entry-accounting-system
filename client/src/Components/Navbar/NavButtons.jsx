@@ -1,16 +1,32 @@
-import { Button, Stack } from "@chakra-ui/react";
-import { useDispatch /*, useSelector*/ } from "react-redux";
+import {
+  Button,
+  Stack,
+  Box,
+  Menu,
+  MenuButton,
+  Avatar,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+} from "@chakra-ui/react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setLogout } from "../../redux/features/userSlice";
 import { ConnectWallet } from "@thirdweb-dev/react";
 
 const NavButtons = ({ isLoggedIn, isMobileScreen }) => {
   const navigate = useNavigate();
-
-  // const { result } = useSelector((state) => ({ ...state.auth }));
   const dispatch = useDispatch();
 
+  // const [avatarPreview, setAvatarPreview] = useState("/profile.png");
+
+  const { user } = useSelector((state) => ({
+    ...state.userAuth,
+  }));
+
   const handleLogoutSubmit = () => {
+    navigate("/");
     dispatch(setLogout());
   };
 
@@ -27,30 +43,51 @@ const NavButtons = ({ isLoggedIn, isMobileScreen }) => {
       }
     >
       {isLoggedIn ? (
-        <>
-          <Button
-            onClick={handleLogoutSubmit}
-            fontSize={isMobileScreen ? "sm" : "lg"}
-            fontWeight={400}
-            variant={"link"}
-            to={"/"}
-            padding={"7px"}
-            colorScheme="white"
-            textDecoration={"none"}
-          >
-            Log out
-          </Button>
+        <Box display="flex" alignItems="center" gap={10}>
+          <Menu>
+            <MenuButton
+              as={Button}
+              rounded={"full"}
+              variant={"link"}
+              cursor={"pointer"}
+              minW={0}
+              marginLeft={{ base: "0em", md: "0.5em" }}
+            >
+              <Avatar
+                size={"md"}
+                src={user ? user?.avatar?.url : "/profile.png"}
+              />
+            </MenuButton>
+            <MenuList>
+              {user?.role === "admin" && (
+                <>
+                  <MenuItem
+                    textColor="black"
+                    onClick={() => navigate("/dashboard")}
+                  >
+                    Dashboard
+                  </MenuItem>
+                  <MenuDivider />
+                </>
+              )}
+
+              <MenuItem textColor="black" onClick={handleLogoutSubmit}>
+                Logout
+              </MenuItem>
+            </MenuList>
+          </Menu>
 
           <ConnectWallet
+            marginRight={"25px"}
             accentColor="#00c2cf"
             colorMode="dark"
-            width={{ base: "150px", md: "unset" }}
+            // width={{ base: "280px", md: "unset" }}
             style={{
               background: "#00c2cf",
               color: "white",
             }}
           />
-        </>
+        </Box>
       ) : (
         <>
           <Button

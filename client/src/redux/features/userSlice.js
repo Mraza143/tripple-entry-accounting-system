@@ -3,9 +3,7 @@ import * as api from "../api.js";
 import Cookies from "js-cookie";
 
 var globalVar;
-const initialUser = Cookies.get("token")
-  ? Cookies.get("token")
-  : null;
+const initialUser = Cookies.get("token") ? Cookies.get("token") : null;
 
 export const login = createAsyncThunk(
   "user/login",
@@ -13,10 +11,10 @@ export const login = createAsyncThunk(
     try {
       const response = await api.loginUser(formValue);
       toast.success("Login Successfully");
-      console.log("login function")
-      console.log(response)
+      console.log("login function");
+      console.log(response);
       navigate("/");
-      globalVar = response.data.token
+      globalVar = response.data.token;
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -31,7 +29,7 @@ export const register = createAsyncThunk(
       const response = await api.registerUser(formValue);
       toast.success("Register Successfully");
       navigate("/");
-      globalVar = response.data.token
+      globalVar = response.data.token;
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -62,7 +60,6 @@ const userSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       state.loading = false;
 
-      console.log(globalVar)
       Cookies.set("token", globalVar, {
         // set the 'profile' cookie
         // expires: 1, // cookie will expire in 30 days

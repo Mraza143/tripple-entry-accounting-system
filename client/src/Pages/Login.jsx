@@ -54,8 +54,9 @@ export default function Login() {
       direction={{ base: "column", md: "row" }}
       marginTop={"78px"}
       fontFamily="poppins"
+      bg="#f7fafc"
     >
-      <Stack flex={1} align={"center"} justify={"center"} p={6} bg="#f7fafc">
+      <Stack flex={1} align={"center"} justify={"center"} p={6}>
         <Stack align={"center"}>
           <Heading
             fontFamily="Lobster Two"
