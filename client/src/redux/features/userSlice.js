@@ -2,13 +2,21 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from "../api.js";
 import Cookies from "js-cookie";
 
+var globalVar;
+const initialUser = Cookies.get("token")
+  ? Cookies.get("token")
+  : null;
+
 export const login = createAsyncThunk(
   "user/login",
   async ({ formValue, navigate, toast }, { rejectWithValue }) => {
     try {
       const response = await api.loginUser(formValue);
       toast.success("Login Successfully");
+      console.log("login function")
+      console.log(response)
       navigate("/");
+      globalVar = response.data.token
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -23,6 +31,7 @@ export const register = createAsyncThunk(
       const response = await api.registerUser(formValue);
       toast.success("Register Successfully");
       navigate("/");
+      globalVar = response.data.token
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -33,7 +42,7 @@ export const register = createAsyncThunk(
 const userSlice = createSlice({
   name: "userAuth",
   initialState: {
-    user: null,
+    user: initialUser,
     error: "",
     loading: false,
   },
@@ -52,7 +61,9 @@ const userSlice = createSlice({
     },
     [login.fulfilled]: (state, action) => {
       state.loading = false;
-      Cookies.set("token", JSON.stringify({ ...action.payload.token }), {
+
+      console.log(globalVar)
+      Cookies.set("token", globalVar, {
         // set the 'profile' cookie
         // expires: 1, // cookie will expire in 30 days
         path: "/", // cookie will be available in all paths
@@ -69,7 +80,7 @@ const userSlice = createSlice({
     },
     [register.fulfilled]: (state, action) => {
       state.loading = false;
-      Cookies.set("token", JSON.stringify({ ...action.payload.token }), {
+      Cookies.set("token", globalVar, {
         // set the 'profile' cookie
         // expires: 1, // cookie will expire in 30 days
         path: "/", // cookie will be available in all paths
