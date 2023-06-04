@@ -10,7 +10,7 @@ import {
   chakra,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { FaTwitter, FaYoutube, FaInstagram } from "react-icons/fa";
+import { FaTwitter, FaGithub, FaFacebook  , FaLinkedin} from "react-icons/fa";
 
 const ListHeader = ({ children }) => {
   return (
@@ -103,14 +103,17 @@ export default function Footer() {
             © 2023 Triple Entry Accounting System. All rights reserved
           </Text>
           <Stack direction={"row"} spacing={6}>
-            <SocialButton label={"Twitter"} href={"#"}>
+            <SocialButton label={"Twitter"} href={"https://twitter.com/TripleEntry1"}>
               <FaTwitter fontSize="20px" />
             </SocialButton>
-            <SocialButton label={"YouTube"} href={"#"}>
-              <FaYoutube fontSize="20px" />
+            <SocialButton label={"Link"} href={"https://www.linkedin.com/company/triple-entry-accounting/"}>
+              <FaLinkedin fontSize="20px" />
             </SocialButton>
-            <SocialButton label={"Instagram"} href={"#"}>
-              <FaInstagram fontSize="20px" />
+            <SocialButton label={"fb"} href={"https://www.facebook.com/profile.php?id=100093116751222"}>
+              <FaFacebook fontSize="20px" />
+            </SocialButton>
+            <SocialButton label={"Git"} href={"https://github.com/ShayanJamil519/tripple-entry-accounting-system"}>
+              <FaGithub fontSize="20px" />
             </SocialButton>
           </Stack>
         </Container>
