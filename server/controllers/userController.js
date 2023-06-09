@@ -74,3 +74,18 @@ export const registerUser = async (req, res) => {
     console.log(error);
   }
 };
+
+export const getAllUsers = async (req, res, next) => {
+  try {
+    const result = await UserModal.find();
+    res.status(200).json({
+      success: true,
+      result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};

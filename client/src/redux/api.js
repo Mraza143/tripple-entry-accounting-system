@@ -1,15 +1,19 @@
 import axios from "axios";
-// import Cookies from "js-cookie";
 
 const devEnv = process.env.NODE_ENV !== "production";
 
 const { REACT_APP_DEV_API, REACT_APP_PROD_API } = process.env;
 
 const API = axios.create({
-  // baseURL: `${devEnv ? REACT_APP_DEV_API : REACT_APP_PROD_API}`,
-  baseURL: "https://nice-erin-clam.cyclic.app",
+  baseURL: `${devEnv ? REACT_APP_DEV_API : REACT_APP_PROD_API}`,
+  // baseURL: "https://nice-erin-clam.cyclic.app",
 });
 
+// Users
 export const loginUser = (formData) => API.post("/api/user/login", formData);
 export const registerUser = (formData) =>
   API.post("/api/user/register", formData);
+export const getAllUsers = () => API.get("/api/user/allUsers");
+
+// Entries
+export const getAllEntries = () => API.get("/api/allEntries");

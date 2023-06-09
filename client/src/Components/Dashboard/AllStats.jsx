@@ -11,9 +11,11 @@ import {
 import { BsPerson } from "react-icons/bs";
 import { FiServer } from "react-icons/fi";
 import { GoLocation } from "react-icons/go";
+import { useSelector } from "react-redux";
 
 function StatsCard(props) {
   const { title, stat, icon } = props;
+
   return (
     <Stat
       px={{ base: 2, md: 4 }}
@@ -45,6 +47,12 @@ function StatsCard(props) {
 }
 
 export default function AllStats() {
+  const { usersDetails } = useSelector((state) => ({
+    ...state.userDetails,
+  }));
+  const { entries } = useSelector((state) => ({
+    ...state.entries,
+  }));
   return (
     <Box maxW="7xl" mx={"auto"} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
       <chakra.h1
@@ -59,12 +67,12 @@ export default function AllStats() {
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
         <StatsCard
           title={"Users"}
-          stat={"5,000"}
+          stat={usersDetails?.length}
           icon={<BsPerson size={"3em"} />}
         />
         <StatsCard
           title={"Entries"}
-          stat={"1,000"}
+          stat={entries?.length}
           icon={<FiServer size={"3em"} />}
         />
         <StatsCard

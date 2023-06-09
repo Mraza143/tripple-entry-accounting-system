@@ -12,19 +12,31 @@ import {
   Heading,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { dummyShowData } from "../../dummyData";
 import Pagination from "../Pagination/Pagination";
 import EditEntryModal from "../Modal/EditEntryModal";
 import DeleteEntryModal from "../Modal/DeleteEntryModal";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllEntries } from "../../redux/features/entrySlice";
 
 const AllEntries = () => {
+  const dispatch = useDispatch();
+
+  const { entries } = useSelector((state) => ({
+    ...state.entries,
+  }));
+
+  useEffect(() => {
+    dispatch(getAllEntries());
+  }, []);
+
   const [currentPage, setCurrentPage] = useState(1); //Pagination Logic
   const itemsPerPage = 6;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = dummyShowData.slice(indexOfFirstItem, indexOfLastItem);
-  const showPagination = dummyShowData.length > itemsPerPage ? true : false;
+  const currentItems = entries.slice(indexOfFirstItem, indexOfLastItem);
+  const showPagination = entries.length > itemsPerPage ? true : false;
 
   const [editEntryId, setEditEntryId] = useState(null);
   const [deleteEntryId, setDeleteEntryId] = useState(null);
@@ -76,10 +88,10 @@ const AllEntries = () => {
           <Tbody>
             {currentItems.map((data, index) => (
               <Tr>
-                <Td maxW={"70px"}>{data.docNumber}</Td>
-                <Td>{data.docType}</Td>
-                <Td>{data.docHeader}</Td>
-                <Td>{data.docPostingDate}</Td>
+                <Td maxW={"70px"}>{data.id}</Td>
+                <Td>{data.documentType}</Td>
+                <Td>{data.headerText}</Td>
+                <Td>{data.postingDate}</Td>
 
                 <Box
                   className="all_entries_scrollbar"
@@ -91,7 +103,7 @@ const AllEntries = () => {
                       <Td display={"flex"} flexDirection={"column"}>
                         <Text>General Ledger: {item.generalLedger}</Text>
                         <Text>Cost Center: {item.costCenter}</Text>
-                        <Text>Line Items Text: {item.lineItemsText}</Text>
+                        <Text>Line Items Text: {item.lineItemText}</Text>
                         <Text>Amount: {item.amount}</Text>
                       </Td>
                     ))}
@@ -102,7 +114,7 @@ const AllEntries = () => {
                     colorScheme="blue"
                     marginRight={"15px"}
                     fontSize={"sm"}
-                    onClick={() => handleEditClick(data?.entryId)}
+                    onClick={() => handleEditClick(data?.id)}
                   >
                     Edit
                   </Button>
@@ -110,7 +122,7 @@ const AllEntries = () => {
                     width={"70px"}
                     colorScheme="red"
                     fontSize={"sm"}
-                    onClick={() => handleDeleteClick(data?.entryId)}
+                    onClick={() => handleDeleteClick(data?.id)}
                   >
                     Delete
                   </Button>
@@ -145,7 +157,7 @@ const AllEntries = () => {
       {showPagination && (
         <Pagination
           itemsPerPage={itemsPerPage}
-          totalItems={dummyShowData.length}
+          totalItems={entries.length}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />

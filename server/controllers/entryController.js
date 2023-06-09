@@ -6,17 +6,6 @@ import entryModel from "../models/entryModel.js";
 export const entryPost = async (req, res) => {
   const { documentType, headerText, documentDate, postingDate, lineItems } =
     req.body;
-  // let lineItemsArray = [];
-  // lineItemsArray.push(lineItems);
-  // const lineItemsList = [];
-  // for(let i = 0; i < lineItemsArray.length; i++){
-  //   lineItemsList.push({
-  //     generalLedger:lineItems.generalLedger,
-  //     costCenter:lineItems.costCenter,
-  //     lineItemText:lineItems.lineItemText,
-  //     amount:lineItems.amount,
-  //   });
-  // }
 
   try {
     const entry = await entryModel.create({
@@ -34,11 +23,18 @@ export const entryPost = async (req, res) => {
 };
 
 export const getAllEntries = async (req, res, next) => {
-  const entries = await entryModel.find();
-  res.status(200).json({
-    success: true,
-    entries,
-  });
+  try {
+    const entries = await entryModel.find();
+    res.status(200).json({
+      success: true,
+      entries,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
 };
 
 export const getSingleEntry = async (req, res, next) => {

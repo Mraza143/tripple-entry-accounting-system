@@ -1,7 +1,4 @@
 import mongoose from "mongoose";
-// import { createRequire } from "module";
-// const require = createRequire(import.meta.url);
-// const sequencer = require("mongoose-sequence")(mongoose);
 
 const CounterSchema = new mongoose.Schema({
   _id: String,
@@ -63,7 +60,6 @@ const entrySchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-// entrySchema.plugin(sequencer, { inc_field: "id", start_seq: 1 });
 
 const getNextId = async function (sequenceName) {
   const sequenceDocument = await this.model("Counter").findOneAndUpdate(
@@ -73,11 +69,6 @@ const getNextId = async function (sequenceName) {
   );
   return sequenceDocument.seq;
 };
-
-// entrySchema.pre("save", async function (next) {
-//   this.modifiedAt = new Date();
-//   next();
-// });
 
 entrySchema.pre("save", async function (next) {
   if (!this.id) {
