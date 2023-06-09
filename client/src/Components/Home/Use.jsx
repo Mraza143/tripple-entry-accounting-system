@@ -15,6 +15,27 @@ import { IoSearchSharp } from "react-icons/io5";
 import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 import { GrView } from "react-icons/gr";
 import { FaExchangeAlt } from "react-icons/fa";
+import axios from "axios";
+import StripeCheckout from "react-stripe-checkout";
+const publishableKey =
+  "pk_test_51NGCJUEqZq4qqBvd5lcipZMyyiU6p72wHqITz8eUjtjFUOl28l8No4zMZHzlVh80sVQemYubAhidvSSrntS814f400UNQ9LHeR";
+const payNow = async (token) => {
+  try {
+    const response = await axios({
+      url: "https://nice-erin-clam.cyclic.app/payment",
+      method: "post",
+      data: {
+        amount: 10 * 100,
+        token,
+      },
+    });
+    if (response.status === 200) {
+      console.log("done");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const Feature = ({ text, icon, iconBg }) => {
   return (
@@ -44,10 +65,18 @@ export default function Use() {
               How to use this system?
             </Heading>
             <Text color={"gray.500"} fontSize={"sm"}>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore Lorem ipsum dolor sit
-              amet, consetetur sadipscing elitr
+              You can start right now with one time subscription fee of 10$ to
+              get this system for you. This will prove to be a game changer for
+              you.Click the below Button to start
             </Text>
+            <StripeCheckout
+              stripeKey={publishableKey}
+              label="Pay Now"
+              name="Pay With Credit Card"
+              amount={1000}
+              description={`Your total is $${10}`}
+              token={payNow}
+            />
           </Box>
           <Stack
             spacing={4}

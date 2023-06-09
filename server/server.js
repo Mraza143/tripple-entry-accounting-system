@@ -7,8 +7,11 @@ import cloudinary from "cloudinary";
 import userRouter from "./routes/userRoute.js";
 import entryRouter from "./routes/entryRoute.js";
 
+import Stripe from "stripe";
+
 const app = express();
 dotenv.config();
+const stripe = Stripe(process.env.STRIPE_SECRET);
 
 app.use(express.json({ limit: "50mb", extended: true }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
@@ -39,6 +42,22 @@ cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+app.post("/payment", async (req, res) => {
+  let status, error;
+  const { token, amount } = req.body;
+  try {
+    await stripe.charges.create({
+      source: token.id,
+      amount,
+      currency: "usd",
+    });
+    status = "success";
+  } catch (error) {
+    console.log(error);
+    status = "Failure";
+  }
+  res.json({ error, status });
 });
 
 const server = app.listen(5000, () =>
