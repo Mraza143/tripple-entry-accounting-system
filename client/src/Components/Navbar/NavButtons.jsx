@@ -9,15 +9,31 @@ import {
   MenuItem,
   MenuDivider,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { setLogout } from "../../redux/features/userSlice";
 import { ConnectWallet } from "@thirdweb-dev/react";
+import jwt from 'jsonwebtoken';
+
+
+
 
 const NavButtons = ({ isLoggedIn, isMobileScreen }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [avatar, setAvatar] = useState("");
+  const [role, setRole] = useState("");
+  useEffect(() => {
+    const token = Cookies.get("token");
+    const decodedToken = jwt.decode(token);
+//const userId = decodedToken.userId;
+const avartar = decodedToken?.avatar;
+setAvatar(avartar)
+setRole(decodedToken?.role)
+
+  }, []);
 
   // const [avatarPreview, setAvatarPreview] = useState("/profile.png");
 
@@ -55,11 +71,11 @@ const NavButtons = ({ isLoggedIn, isMobileScreen }) => {
             >
               <Avatar
                 size={"md"}
-                src={user ? user?.avatar?.url : "/profile.png"}
+                src={user ? avatar : "/profile.png"}
               />
             </MenuButton>
             <MenuList>
-              {user?.role === "admin" && (
+              {role === "admin" && (
                 <>
                   <MenuItem
                     textColor="black"
