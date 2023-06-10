@@ -13,12 +13,37 @@ export const getAllEntries = createAsyncThunk(
   }
 );
 
+export const getSingleEntry = createAsyncThunk(
+  "entries/getSingle",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await api.getSingleEntry(id);
+      return response.data.entry;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const updateSingleEntry = createAsyncThunk(
+  "entries/updateSingleEntry",
+  async ({ id, formData }, { rejectWithValue }) => {
+    try {
+      const response = await api.updateSingleEntry(id, formData);
+      return response.data.updatedEntry;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
 const entrySlice = createSlice({
   name: "entries",
   initialState: {
     error: "",
     loading: false,
     entries: [],
+    singleEntry: [],
   },
   reducers: {
     setEntries: (state, action) => {
@@ -26,6 +51,7 @@ const entrySlice = createSlice({
     },
   },
   extraReducers: {
+    // Get All Entries
     [getAllEntries.pending]: (state) => {
       state.loading = true;
     },
@@ -34,6 +60,31 @@ const entrySlice = createSlice({
       state.entries = action.payload;
     },
     [getAllEntries.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
+    },
+
+    // Get Single Entry
+    [getSingleEntry.pending]: (state) => {
+      state.loading = true;
+    },
+    [getSingleEntry.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.singleEntry = action.payload;
+    },
+    [getSingleEntry.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
+    },
+    // Update Entry
+    [updateSingleEntry.pending]: (state) => {
+      state.loading = true;
+    },
+    [updateSingleEntry.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.entries = action.payload;
+    },
+    [updateSingleEntry.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
     },

@@ -17,3 +17,6 @@ export const getAllUsers = () => API.get("/api/user/allUsers");
 
 // Entries
 export const getAllEntries = () => API.get("/api/allEntries");
+export const getSingleEntry = (id) => API.get(`/api/entry/${id}`);
+export const updateSingleEntry = (id, formData) =>
+  API.put(`/api/updateSingleEntry/${id}`, formData);

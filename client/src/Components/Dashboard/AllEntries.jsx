@@ -13,15 +13,17 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { dummyShowData } from "../../dummyData";
+// import { dummyShowData } from "../../dummyData";
 import Pagination from "../Pagination/Pagination";
 import EditEntryModal from "../Modal/EditEntryModal";
 import DeleteEntryModal from "../Modal/DeleteEntryModal";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllEntries } from "../../redux/features/entrySlice";
+import { getAllEntries, getSingleEntry } from "../../redux/features/entrySlice";
+import axios from "axios";
 
 const AllEntries = () => {
   const dispatch = useDispatch();
+  const [singleEntry, setSingleEntry] = useState();
 
   const { entries } = useSelector((state) => ({
     ...state.entries,
@@ -52,9 +54,18 @@ const AllEntries = () => {
     onClose: onDeleteEntryModalClose,
   } = useDisclosure();
 
-  const handleEditClick = (entryId) => {
+  const handleEditClick = async (entryId) => {
     setEditEntryId(entryId);
     onEditEntryModalOpen();
+
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/entry/${entryId}`
+      );
+      setSingleEntry(response.data.entry);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleDeleteClick = (entryId) => {
@@ -87,7 +98,7 @@ const AllEntries = () => {
           </Thead>
           <Tbody>
             {currentItems.map((data, index) => (
-              <Tr>
+              <Tr key={index}>
                 <Td maxW={"70px"}>{data.id}</Td>
                 <Td>{data.documentType}</Td>
                 <Td>{data.headerText}</Td>
@@ -99,8 +110,8 @@ const AllEntries = () => {
                   overflowY={"auto"}
                 >
                   {data.lineItems &&
-                    data.lineItems.map((item) => (
-                      <Td display={"flex"} flexDirection={"column"}>
+                    data.lineItems.map((item, i) => (
+                      <Td key={i} display={"flex"} flexDirection={"column"}>
                         <Text>General Ledger: {item.generalLedger}</Text>
                         <Text>Cost Center: {item.costCenter}</Text>
                         <Text>Line Items Text: {item.lineItemText}</Text>
@@ -140,6 +151,7 @@ const AllEntries = () => {
           onOpen={onEditEntryModalOpen}
           onClose={onEditEntryModalClose}
           entryId={editEntryId}
+          initialFormData={singleEntry}
         />
       )}
 

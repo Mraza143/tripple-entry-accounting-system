@@ -1,6 +1,3 @@
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-
 import entryModel from "../models/entryModel.js";
 
 export const entryPost = async (req, res) => {
@@ -38,11 +35,56 @@ export const getAllEntries = async (req, res, next) => {
 };
 
 export const getSingleEntry = async (req, res, next) => {
-  const entry = await entryModel.findById(req.params.id);
-  res.status(200).json({
-    success: true,
-    entry,
-  });
+  try {
+    const id = req.params.id;
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid entry id",
+      });
+    }
+
+    const entry = await entryModel.findOne({ id });
+    res.status(200).json({
+      success: true,
+      entry,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateSingleEntry = async (req, res, next) => {
+  try {
+    const entryId = req.params.id;
+    const updateData = req.body;
+
+    if (!entryId) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid entry id",
+      });
+    }
+
+    // Find the entry by ID
+    const entry = await entryModel.findOne({ id: entryId });
+
+    if (!entry) {
+      return res.status(404).json({ message: "Entry not found" });
+    }
+
+    // Update all fields of the entry
+    for (const field in updateData) {
+      entry[field] = updateData[field];
+    }
+
+    // Save the updated entry
+    const updatedEntry = await entry.save();
+    return res.json(updatedEntry);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
 };
 
 export const updateEntry = async (req, res, next) => {
