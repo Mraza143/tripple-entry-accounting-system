@@ -19,7 +19,7 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     console.log(process.env.JWT_SECRET);
     const token = jwt.sign(
-      { email: oldUser.email, id: oldUser._id, role: oldUser.role },
+      { email: oldUser.email, id: oldUser._id, role: oldUser.role  ,avatar :oldUser.avatar.url },
       process.env.JWT_SECRET,
       {
         expiresIn: process.env.JWT_EXPIRESIN,
@@ -62,7 +62,7 @@ export const registerUser = async (req, res) => {
     });
 
     const token = jwt.sign(
-      { email: result.email, id: result._id, role: result.role },
+      { email: result.email, id: result._id, role: result.role ,avatar :result.avatar.url },
       process.env.JWT_SECRET,
       {
         expiresIn: process.env.JWT_EXPIRESIN,

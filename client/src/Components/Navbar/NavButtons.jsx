@@ -32,6 +32,8 @@ const NavButtons = ({ isLoggedIn, isMobileScreen }) => {
 const avartar = decodedToken?.avatar;
 setAvatar(avartar)
 setRole(decodedToken?.role)
+console.log(token)
+console.log(decodedToken)
 
   }, []);
 

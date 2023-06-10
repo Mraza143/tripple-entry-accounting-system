@@ -293,7 +293,7 @@ export default function EditEntryModal(props) {
                 type="text"
                 name="documentType"
                 placeholder="Enter doc. type"
-                value={formData.documentType}
+                value={formData?.documentType}
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -305,7 +305,7 @@ export default function EditEntryModal(props) {
                 type="text"
                 placeholder="Enter doc. text"
                 name="headerText"
-                value={formData.headerText}
+                value={formData?.headerText}
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -317,7 +317,7 @@ export default function EditEntryModal(props) {
                 type="date"
                 placeholder="Enter doc. posting date"
                 name="postingDate"
-                value={formData.postingDate}
+                value={formData?.postingDate}
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -326,9 +326,10 @@ export default function EditEntryModal(props) {
               Line Items:
             </Text>
 
-            {formData.lineItems.map((lineItem, index) => (
+            {formData?.lineItems?.map((lineItem, index) => (
               <div key={index}>
                 <FormControl id={`generalLedger-${index}`} mb={3}>
+                  <div>line item { index}</div>
                   <FormLabel fontWeight="bold" fontSize={"sm"} mb={1}>
                     General Ledger
                   </FormLabel>
@@ -336,7 +337,7 @@ export default function EditEntryModal(props) {
                     type="text"
                     placeholder="Enter general ledger"
                     name="generalLedger"
-                    value={lineItem.generalLedger}
+                    value={lineItem?.generalLedger}
                     onChange={(e) => handleLineItemChange(e, index)}
                   />
                 </FormControl>
@@ -349,7 +350,7 @@ export default function EditEntryModal(props) {
                     type="text"
                     placeholder="Enter cost center"
                     name="costCenter"
-                    value={lineItem.costCenter}
+                    value={lineItem?.costCenter}
                     onChange={(e) => handleLineItemChange(e, index)}
                   />
                 </FormControl>
@@ -363,7 +364,7 @@ export default function EditEntryModal(props) {
                     min="0"
                     placeholder="Enter amount"
                     name="amount"
-                    value={lineItem.amount}
+                    value={lineItem?.amount}
                     onChange={(e) => handleLineItemChange(e, index)}
                   />
                 </FormControl>
