@@ -13,12 +13,11 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-// import { dummyShowData } from "../../dummyData";
 import Pagination from "../Pagination/Pagination";
 import EditEntryModal from "../Modal/EditEntryModal";
 import DeleteEntryModal from "../Modal/DeleteEntryModal";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllEntries, getSingleEntry } from "../../redux/features/entrySlice";
+import { getAllEntries } from "../../redux/features/entrySlice";
 import axios from "axios";
 
 const AllEntries = () => {
@@ -61,7 +60,6 @@ const AllEntries = () => {
         `http://localhost:5000/api/entry/${entryId}`
       );
       setSingleEntry(response.data.entry);
-      // console.log(response.data.entry)
     } catch (err) {
       console.log(err);
     }

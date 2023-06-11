@@ -82,7 +82,35 @@ export const updateSingleEntry = async (req, res, next) => {
     const updatedEntry = await entry.save();
     return res.json(updatedEntry);
   } catch (error) {
-    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+export const removeEntry = async (req, res, next) => {
+  try {
+    const entryId = req.params.id;
+
+    if (!entryId) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid entry id",
+      });
+    }
+
+    // Find the entry by ID
+    const entry = await entryModel.findOne({ id: entryId });
+
+    if (!entry) {
+      return res.status(404).json({ message: "Entry not found" });
+    }
+
+    await entry.deleteOne();
+
+    res.status(200).json({
+      success: true,
+      message: "Entry Deleted Successfully",
+    });
+  } catch (error) {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
@@ -104,14 +132,5 @@ export const updateEntry = async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-  });
-};
-
-export const removeEntry = async (req, res, next) => {
-  const entry = await entryModel.findById(req.params.id);
-  await entry.deleteOne();
-  res.status(200).json({
-    success: true,
-    message: "Entry Deleted Successfully",
   });
 };

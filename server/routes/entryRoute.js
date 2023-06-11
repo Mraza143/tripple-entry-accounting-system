@@ -12,9 +12,9 @@ import {
 
 router.route("/entry").post(entryPost);
 router.route("/allEntries").get(getAllEntries);
+router.route("/entry/:id").get(getSingleEntry);
 router.route("/updateSingleEntry/:id").put(updateSingleEntry);
 router.route("/deleteEntry/:id").delete(removeEntry);
 router.route("/updateEntry/:id").put(updateEntry);
-router.route("/entry/:id").get(getSingleEntry);
 
 export default router;

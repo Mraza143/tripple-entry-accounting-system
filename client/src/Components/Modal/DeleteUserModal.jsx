@@ -10,20 +10,17 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
-export default function DeleteEntryModal(props) {
-  const navigate = useNavigate();
-  const { isOpen, onOpen, onClose, entryId } = props;
+export default function DeleteUserModal(props) {
+  const { isOpen, onOpen, onClose, userName } = props;
   const cancelRef = React.useRef();
 
-  const handleDeleteEntry = async (entryId) => {
+  const handleDeleteUser = async (userName) => {
     try {
       await axios
-        .delete(`http://localhost:5000/api/deleteEntry/${entryId}`)
+        .delete(`http://localhost:5000/api/user/deleteUser/${userName}`)
         .then(() => {
-          toast.success("Entry Deleted");
-          navigate("/check");
+          toast.success("User Deleted");
         });
     } catch (err) {
       toast.error(err);
@@ -57,7 +54,7 @@ export default function DeleteEntryModal(props) {
               <Button
                 colorScheme="red"
                 ml={3}
-                onClick={() => handleDeleteEntry(entryId)}
+                onClick={() => handleDeleteUser(userName)}
               >
                 Delete
               </Button>

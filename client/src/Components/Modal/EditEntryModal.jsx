@@ -14,8 +14,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function EditEntryModal(props) {
+  const navigate = useNavigate();
   const { isOpen, onOpen, onClose, entryId, initialFormData } = props;
   const [formData, setFormData] = useState([]);
 
@@ -53,10 +56,11 @@ export default function EditEntryModal(props) {
           lineItems,
         })
         .then(() => {
-          console.log("Entry Updated");
+          toast.success("Entry Updated");
+          navigate("/check");
         });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      toast.error(err);
     }
 
     onClose();
