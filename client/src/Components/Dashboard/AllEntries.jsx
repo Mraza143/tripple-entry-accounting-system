@@ -61,13 +61,11 @@ const AllEntries = () => {
         `http://localhost:5000/api/entry/${entryId}`
       );
       setSingleEntry(response.data.entry);
-      console.log(response.data.entry)
+      // console.log(response.data.entry)
     } catch (err) {
       console.log(err);
     }
     onEditEntryModalOpen();
-
-
   };
 
   const handleDeleteClick = (entryId) => {
