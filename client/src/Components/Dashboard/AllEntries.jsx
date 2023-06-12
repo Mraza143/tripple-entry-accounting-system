@@ -57,7 +57,7 @@ const AllEntries = () => {
     setEditEntryId(entryId);
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/entry/${entryId}`
+        `https://nice-erin-clam.cyclic.app/api/entry/${entryId}`
       );
       setSingleEntry(response.data.entry);
     } catch (err) {

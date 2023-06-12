@@ -18,7 +18,7 @@ export default function DeleteUserModal(props) {
   const handleDeleteUser = async (userName) => {
     try {
       await axios
-        .delete(`http://localhost:5000/api/user/deleteUser/${userName}`)
+        .delete(`https://nice-erin-clam.cyclic.app/api/user/deleteUser/${userName}`)
         .then(() => {
           toast.success("User Deleted");
         });

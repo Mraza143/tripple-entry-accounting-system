@@ -40,7 +40,7 @@ const payNow = async (token) => {
       console.log(id)
       try {
         await axios
-          .put(`http://localhost:5000/api/user/updateRole/${id}`)
+          .put(`https://nice-erin-clam.cyclic.app/api/user/updateRole/${id}`)
           .then(() => {
             console.log("Entry Updated");
           });

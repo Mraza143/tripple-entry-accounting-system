@@ -25,6 +25,7 @@ const NavButtons = ({ isLoggedIn, isMobileScreen }) => {
   const dispatch = useDispatch();
   const [avatar, setAvatar] = useState("");
   const [role, setRole] = useState("");
+  
   useEffect(() => {
     const token = Cookies.get("token");
     const decodedToken = jwt.decode(token);
@@ -35,7 +36,7 @@ setRole(decodedToken?.role)
 console.log(token)
 console.log(decodedToken)
 
-  }, []);
+  }, [isLoggedIn]);
 
   // const [avatarPreview, setAvatarPreview] = useState("/profile.png");
 

@@ -20,7 +20,7 @@ export default function DeleteEntryModal(props) {
   const handleDeleteEntry = async (entryId) => {
     try {
       await axios
-        .delete(`http://localhost:5000/api/deleteEntry/${entryId}`)
+        .delete(`https://nice-erin-clam.cyclic.app/api/deleteEntry/${entryId}`)
         .then(() => {
           toast.success("Entry Deleted");
           navigate("/check");

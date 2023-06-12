@@ -94,7 +94,7 @@ const AllUsers = () => {
       </TableContainer>
 
       {/* Delete User Modal */}
-      {deleteUserId && (
+      {deleteUserName && (
         <DeleteUserModal
           isOpen={isDeleteUserModalOpen}
           onOpen={onDeleteUserModalOpen}

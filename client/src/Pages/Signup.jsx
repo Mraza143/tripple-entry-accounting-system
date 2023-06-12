@@ -25,7 +25,7 @@ const initialState = {
   name: "",
   email: "",
   password: "",
-  role: "",
+  role: "user",
   avatar: "",
 };
 
@@ -136,16 +136,6 @@ export default function Signup() {
                 </InputRightElement>
               </InputGroup>
             </FormControl>
-            <Select
-              cursor="pointer"
-              name="role"
-              value={role}
-              onChange={onInputChange}
-              placeholder="Select Role:"
-            >
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </Select>
             <FormControl id="file" isRequired>
               <FormLabel>Upload Image</FormLabel>
               <Input

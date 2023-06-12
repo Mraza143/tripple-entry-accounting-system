@@ -102,7 +102,7 @@ export const getAllUsers = async (req, res, next) => {
 
 export const removeUser = async (req, res, next) => {
   try {
-    const userName = req.params.name;
+    const userName = req.params.id;
 
     if (!userName) {
       return res.status(400).json({
@@ -112,7 +112,7 @@ export const removeUser = async (req, res, next) => {
     }
 
     // Find the entry by ID
-    const user = await UserModal.findOne({ id: userName });
+    const user = await UserModal.findOne({ name: userName });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });

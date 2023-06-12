@@ -49,7 +49,7 @@ export default function EditEntryModal(props) {
 
     try {
       await axios
-        .put(`http://localhost:5000/api/updateSingleEntry/${entryId}`, {
+        .put(`https://nice-erin-clam.cyclic.app/api/updateSingleEntry/${entryId}`, {
           documentType,
           headerText,
           documentDate,
