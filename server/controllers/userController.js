@@ -19,7 +19,12 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     console.log(process.env.JWT_SECRET);
     const token = jwt.sign(
-      { email: oldUser.email, id: oldUser._id, role: oldUser.role  ,avatar :oldUser.avatar.url },
+      {
+        email: oldUser.email,
+        id: oldUser._id,
+        role: oldUser.role,
+        avatar: oldUser.avatar.url,
+      },
       process.env.JWT_SECRET,
       {
         expiresIn: process.env.JWT_EXPIRESIN,
@@ -62,7 +67,12 @@ export const registerUser = async (req, res) => {
     });
 
     const token = jwt.sign(
-      { email: result.email, id: result._id, role: result.role ,avatar :result.avatar.url },
+      {
+        email: result.email,
+        id: result._id,
+        role: result.role,
+        avatar: result.avatar.url,
+      },
       process.env.JWT_SECRET,
       {
         expiresIn: process.env.JWT_EXPIRESIN,
@@ -87,5 +97,34 @@ export const getAllUsers = async (req, res, next) => {
       success: false,
       error: error.message,
     });
+  }
+};
+
+export const removeUser = async (req, res, next) => {
+  try {
+    const userName = req.params.name;
+
+    if (!userName) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid userName",
+      });
+    }
+
+    // Find the entry by ID
+    const user = await UserModal.findOne({ id: userName });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    await user.deleteOne();
+
+    res.status(200).json({
+      success: true,
+      message: "User Deleted Successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
