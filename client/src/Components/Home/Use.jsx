@@ -11,12 +11,15 @@ import {
   Box,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { toast } from "react-toastify";
 import { IoSearchSharp } from "react-icons/io5";
 import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 import { GrView } from "react-icons/gr";
 import { FaExchangeAlt } from "react-icons/fa";
 import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
+import Cookies from "js-cookie";
+import jwt from 'jsonwebtoken';
 const publishableKey =
   "pk_test_51NGCJUEqZq4qqBvd5lcipZMyyiU6p72wHqITz8eUjtjFUOl28l8No4zMZHzlVh80sVQemYubAhidvSSrntS814f400UNQ9LHeR";
 const payNow = async (token) => {
@@ -30,10 +33,24 @@ const payNow = async (token) => {
       },
     });
     if (response.status === 200) {
-      console.log("done");
+      toast.success("Transaction Successfull");
+      const token = Cookies.get("token");
+      const decodedToken = jwt.decode(token);
+      const id = decodedToken?.id
+      console.log(id)
+      try {
+        await axios
+          .put(`http://localhost:5000/api/user/updateRole/${id}`)
+          .then(() => {
+            console.log("Entry Updated");
+          });
+      } catch (error) {
+        console.log(error);
+      }
     }
   } catch (error) {
     console.log(error);
+    toast.error(error.message)
   }
 };
 
