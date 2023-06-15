@@ -10,8 +10,10 @@ import {
 } from "@chakra-ui/react";
 import { BsPerson } from "react-icons/bs";
 import { FiServer } from "react-icons/fi";
-import { GoLocation } from "react-icons/go";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUsers } from "../../redux/features/userDetailsSlice";
+import { getAllEntries } from "../../redux/features/entrySlice";
+import { useEffect } from "react";
 
 function StatsCard(props) {
   const { title, stat, icon } = props;
@@ -19,7 +21,7 @@ function StatsCard(props) {
   return (
     <Stat
       px={{ base: 2, md: 4 }}
-      py={"5"}
+      py={"10"}
       shadow={"xl"}
       border={"1px solid"}
       borderColor={useColorModeValue("gray.800", "gray.500")}
@@ -47,24 +49,32 @@ function StatsCard(props) {
 }
 
 export default function AllStats() {
+  const dispatch = useDispatch();
   const { usersDetails } = useSelector((state) => ({
     ...state.userDetails,
   }));
   const { entries } = useSelector((state) => ({
     ...state.entries,
   }));
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+    dispatch(getAllEntries());
+  });
+
   return (
-    <Box maxW="7xl" mx={"auto"} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
+    <Box maxW="7xl" mx={"auto"} px={{ base: 2, sm: 12, md: 17 }}>
       <chakra.h1
         textAlign={"center"}
-        fontSize={"4xl"}
+        fontSize={"6xl"}
         py={10}
-        fontFamily={"poppins"}
-        fontWeight={"bold"}
+        // fontWeight={"bold"}
+        fontFamily="Lobster Two"
+        color={"#43a2a7"}
       >
         Our system is expanding, you could be too.
       </chakra.h1>
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
+      <SimpleGrid columns={{ base: 1, md: 1 }} spacing={{ base: 5, lg: 8 }}>
         <StatsCard
           title={"Users"}
           stat={usersDetails?.length}
@@ -74,11 +84,6 @@ export default function AllStats() {
           title={"Entries"}
           stat={entries?.length}
           icon={<FiServer size={"3em"} />}
-        />
-        <StatsCard
-          title={"Datacenters"}
-          stat={"7"}
-          icon={<GoLocation size={"3em"} />}
         />
       </SimpleGrid>
     </Box>

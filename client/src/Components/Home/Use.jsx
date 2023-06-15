@@ -19,7 +19,7 @@ import { FaExchangeAlt } from "react-icons/fa";
 import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
 import Cookies from "js-cookie";
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 const publishableKey =
   "pk_test_51NGCJUEqZq4qqBvd5lcipZMyyiU6p72wHqITz8eUjtjFUOl28l8No4zMZHzlVh80sVQemYubAhidvSSrntS814f400UNQ9LHeR";
 const payNow = async (token) => {
@@ -36,8 +36,8 @@ const payNow = async (token) => {
       toast.success("Transaction Successfull");
       const token = Cookies.get("token");
       const decodedToken = jwt.decode(token);
-      const id = decodedToken?.id
-      console.log(id)
+      const id = decodedToken?.id;
+      console.log(id);
       try {
         await axios
           .put(`https://nice-erin-clam.cyclic.app/api/user/updateRole/${id}`)
@@ -50,7 +50,7 @@ const payNow = async (token) => {
     }
   } catch (error) {
     console.log(error);
-    toast.error(error.message)
+    toast.error(error.message);
   }
 };
 
@@ -143,7 +143,7 @@ export default function Use() {
             rounded={"md"}
             alt={"feature image"}
             src={"/use__image.png"}
-            objectFit={"cover"}
+            // objectFit={"cover"}
           />
         </Flex>
       </SimpleGrid>
